@@ -4,9 +4,7 @@ const path = require('path');
 process.env.BABEL_ENV = 'development';
 process.env.NODE_ENV = 'development';
 
-const prettierOptions = JSON.parse(
-  fs.readFileSync(path.resolve(__dirname, '.prettierrc'), 'utf8'),
-);
+const prettierOptions = JSON.parse(fs.readFileSync(path.resolve(__dirname, '.prettierrc'), 'utf8'));
 
 module.exports = {
   extends: ['react-app', 'prettier'],
@@ -16,7 +14,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['**/*.ts?(x)'],
+      files: ['**/*.{ts?(x),js}'],
       rules: { 'prettier/prettier': ['warn', prettierOptions] },
     },
   ],

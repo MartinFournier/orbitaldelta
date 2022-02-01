@@ -2,6 +2,5 @@
 . "$(dirname "$0")/_/husky.sh"
 export FORCE_COLOR=1
 
-# yarn checkTs
-yarn lint-staged
-
+npm run checkTs
+npx lint-staged

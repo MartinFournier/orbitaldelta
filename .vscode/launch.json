@@ -2,6 +2,23 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "firefox",
+      "request": "launch",
+      "reAttach": true,
+      "name": "Firefox",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}/src",
+      "sourceMapPathOverrides": {
+        "webpack:///src/*": "${webRoot}/*"
+      },
+      "pathMappings": [
+        {
+          "url": "http://localhost:3000/home/martin/dev/orbitaltarget/src/app/pages/HomePage/index.tsx",
+          "path": "${workspaceFolder}/src/index.tsx"
+        }
+      ]
+    },
+    {
       "name": "Chrome",
       "type": "chrome",
       "request": "launch",
