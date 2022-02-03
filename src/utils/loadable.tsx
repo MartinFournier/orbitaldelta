@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { lazy, Suspense } from 'react';
 
 interface Opts {
@@ -18,8 +19,10 @@ export const lazyLoad = <T extends Promise<any>, U extends React.ComponentType<a
 
   const LazyComponent = lazy(lazyFactory);
 
+  if (!opts) throw new Error('Options are not defined');
+
   return (props: React.ComponentProps<U>): JSX.Element => (
-    <Suspense fallback={opts.fallback!}>
+    <Suspense fallback={opts.fallback ?? <></>}>
       <LazyComponent {...props} />
     </Suspense>
   );

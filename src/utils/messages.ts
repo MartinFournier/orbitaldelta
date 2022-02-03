@@ -5,6 +5,7 @@
  * `internals/extractMessages/stringfyTranslations.js` script converts this to `t('a.b.c')` style before `i18next-scanner` scans the file contents
  * so that our json objects can also be recognized by the scanner.
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const _t = (id: string, ...rest: any[]): [string, ...any[]] => {
   if (!id) {
     id = '_NOT_TRANSLATED_';
