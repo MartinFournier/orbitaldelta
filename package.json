@@ -44,6 +44,9 @@
     ]
   },
   "dependencies": {
+    "@mui/icons-material": "5.3.1",
+    "@mui/material": "5.4.0",
+    "@mui/styled-engine-sc": "5.3.0",
     "@reduxjs/toolkit": "1.7.1",
     "fontfaceobserver": "2.1.0",
     "i18next": "21.6.10",

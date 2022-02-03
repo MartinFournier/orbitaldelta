@@ -22,7 +22,10 @@
         "name": "typescript-styled-plugin",
         "validate": false
       }
-    ]
+    ],
+    "paths": {
+      "@mui/styled-engine": ["./node_modules/@mui/styled-engine-sc"]
+    }
   },
   "include": ["src"],
   "ts-node": {

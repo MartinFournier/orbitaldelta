@@ -289,6 +289,8 @@ module.exports = function (webpackEnv) {
           'react-dom$': 'react-dom/profiling',
           'scheduler/tracing': 'scheduler/tracing-profiling',
         }),
+
+        '@mui/styled-engine': '@mui/styled-engine-sc',
         ...(modules.webpackAliases || {}),
       },
       plugins: [
