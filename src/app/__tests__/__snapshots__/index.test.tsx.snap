@@ -3,7 +3,7 @@
 exports[`<App /> should render and match the snapshot 1`] = `
 <BrowserRouter>
   <Helmet
-    defaultTitle="React Boilerplate"
+    defaultTitle="Orbital Target"
     defer={true}
     encodeSpecialCharacters={true}
     htmlAttributes={
@@ -12,22 +12,24 @@ exports[`<App /> should render and match the snapshot 1`] = `
       }
     }
     prioritizeSeoTags={false}
-    titleTemplate="%s - React Boilerplate"
+    titleTemplate="%s - Orbital Target"
   >
     <meta
-      content="A React Boilerplate application"
+      content="An incremental based on automated rocketry."
       name="description"
     />
   </Helmet>
-  <Routes>
-    <Route
-      element={<Unknown />}
-      path="/"
-    />
-    <Route
-      element={<Unknown />}
-    />
-  </Routes>
+  <ErrorHandler>
+    <Routes>
+      <Route
+        element={<Unknown />}
+        path="/"
+      />
+      <Route
+        element={<Unknown />}
+      />
+    </Routes>
+  </ErrorHandler>
   <Memo(l) />
 </BrowserRouter>
 `;
