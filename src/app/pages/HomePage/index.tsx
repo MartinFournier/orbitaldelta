@@ -1,6 +1,7 @@
 import { Box } from '@mui/material';
 import * as React from 'react';
 import { Helmet } from 'react-helmet-async';
+import buildInfo from 'utils/buildInfo';
 
 export function HomePage() {
   return (
@@ -10,7 +11,9 @@ export function HomePage() {
         <meta name="description" content="A Boilerplate application homepage" />
       </Helmet>
       <Box>
-        <span>My HomePage</span>
+        <span>
+          My HomePage - {buildInfo.version} ({buildInfo.commit}) - {new Date(buildInfo.time).toISOString()}
+        </span>
       </Box>
     </>
   );

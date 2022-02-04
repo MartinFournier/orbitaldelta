@@ -57,6 +57,10 @@ process.env.NODE_PATH = (process.env.NODE_PATH || '')
 // injected into the application via DefinePlugin in webpack configuration.
 const REACT_APP = /^REACT_APP_/i;
 
+// Get the current git commit hash & package.json version
+const commitHash = require('child_process').execSync('git rev-parse --short HEAD').toString().trim();
+const version = require(paths.appPackageJson).version;
+
 function getClientEnvironment(publicUrl) {
   const raw = Object.keys(process.env)
     .filter(key => REACT_APP.test(key))
@@ -85,6 +89,10 @@ function getClientEnvironment(publicUrl) {
         // Whether or not react-refresh is enabled.
         // It is defined here so it is available in the webpackHotDevClient.
         FAST_REFRESH: process.env.FAST_REFRESH !== 'false',
+
+        BUILD_VERSION: version,
+        BUILD_COMMIT: commitHash,
+        BUILD_TIME: new Date().getTime(),
       },
     );
   // Stringify all values so we can feed into webpack DefinePlugin
