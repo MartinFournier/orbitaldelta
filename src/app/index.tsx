@@ -16,6 +16,7 @@ import { HomePage } from './pages/HomePage/Loadable';
 import { NotFoundPage } from './components/NotFoundPage/Loadable';
 import { useTranslation } from 'react-i18next';
 import { ErrorHandler } from './components/ErrorHandler';
+import { Engine } from './components/Engine';
 
 export function App() {
   const { i18n } = useTranslation();
@@ -29,10 +30,12 @@ export function App() {
         <meta name="description" content="An incremental based on automated rocketry." />
       </Helmet>
       <ErrorHandler>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route element={<NotFoundPage />} />
-        </Routes>
+        <Engine>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route element={<NotFoundPage />} />
+          </Routes>
+        </Engine>
       </ErrorHandler>
       <GlobalStyle />
     </BrowserRouter>
