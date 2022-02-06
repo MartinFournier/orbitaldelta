@@ -24,8 +24,11 @@ module.exports = {
       rules: { '@typescript-eslint/no-var-requires': 0 },
     },
     {
-      files: ['**/*.test.ts'],
-      rules: { '@typescript-eslint/no-explicit-any': 0 },
+      files: ['**/*.test.{ts,tsx}'],
+      rules: {
+        '@typescript-eslint/no-explicit-any': 0,
+        '@typescript-eslint/no-non-null-assertion': 0,
+      },
     },
   ],
 };
