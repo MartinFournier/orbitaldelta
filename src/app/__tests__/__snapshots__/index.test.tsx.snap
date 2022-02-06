@@ -20,15 +20,17 @@ exports[`<App /> should render and match the snapshot 1`] = `
     />
   </Helmet>
   <ErrorHandler>
-    <Routes>
-      <Route
-        element={<Unknown />}
-        path="/"
-      />
-      <Route
-        element={<Unknown />}
-      />
-    </Routes>
+    <Engine>
+      <Routes>
+        <Route
+          element={<Unknown />}
+          path="/"
+        />
+        <Route
+          element={<Unknown />}
+        />
+      </Routes>
+    </Engine>
   </ErrorHandler>
   <Memo(l) />
 </BrowserRouter>
