@@ -10,7 +10,7 @@ export const playerUpdateSaga = createAction<number>('player/playerUpdate');
 export function* process(action: PayloadAction<number>) {
   const player: PlayerState = yield select(selectPlayer);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const updatedPlayer: PlayerState = yield call(processPlayer, player, action.payload);
+  const updatedPlayer: PlayerState = yield call(processPlayer, player, player.processingDeltaMs);
   // if lastUpdated > new value, abort
   // calculate duration increment
   yield put(playerActions.changeLastProcessed(new Date().getTime()));

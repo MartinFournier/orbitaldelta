@@ -1,6 +1,6 @@
 import pino from 'pino';
 const logger = pino({
-  level: 'info',
+  level: 'debug',
   browser: { asObject: true },
 });
 
