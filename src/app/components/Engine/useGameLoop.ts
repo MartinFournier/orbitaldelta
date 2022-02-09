@@ -1,15 +1,44 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import throttle from 'lodash/throttle';
 
+export declare type Timings = {
+  startedOn: number;
+  currentFrameTime: number;
+  previousFrameTime: number;
+  fps: number;
+  ups: number;
+};
+
 const usePrevious = (value: number) => {
-  const ref = useRef<number>();
+  const ref = useRef<number>(0);
   useEffect(() => {
     ref.current = value;
   });
   return ref.current;
 };
 
-const useGameLoop = (handleProcessing: (deltaMs: number) => void, throttleDelay: number) => {
+const getHistory = (deltaMs: number, history: number[]) => {
+  if (deltaMs <= 0) return history;
+  const current = 1000 / deltaMs;
+  const entries = [...history].slice(0, 59);
+  entries.unshift(current);
+  return entries;
+};
+
+const getAverage = (history: number[]) => {
+  if (history.length === 0) return 0;
+  const total = history.reduce((previousValue, currentValue) => previousValue + currentValue, 0);
+  const avg = Math.round((total / history.length) * 100) / 100;
+  return avg;
+};
+
+/**
+ * Game loop hook that updates every frame, with a processing handler triggered according to a delay.
+ * @param handleProcessing The main processing handler, throttled by throttleDelay
+ * @param throttleDelay How frequently the processing should be triggered
+ * @returns The timings information
+ */
+const useGameLoop = (handleProcessing: (deltaMs: number) => void, throttleDelay: number): Timings => {
   const [startedOn] = useState<number>(performance.now());
   const [currentFrameTime, setCurrentFrameTime] = useState<number>(0);
   const previousFrameTime = usePrevious(currentFrameTime);
@@ -20,59 +49,52 @@ const useGameLoop = (handleProcessing: (deltaMs: number) => void, throttleDelay:
   const [fps, setFps] = useState<number>(0);
   const [ups, setUps] = useState<number>(0);
 
-  const throttledProcessing = useMemo(
-    () =>
-      throttle((frameTime: number, processedOn: number) => {
-        const delta = frameTime - (processedOn ?? 0);
-        setProcessedTime(frameTime);
-        handleProcessing(delta);
-      }, throttleDelay),
-    [handleProcessing, throttleDelay],
-  );
+  // The main engine processing will be throttled to the param value
+  const throttledProcessing = useMemo(() => {
+    const handler = throttle((frameTime: number, processedOn: number) => {
+      const delta = frameTime - processedOn;
+      setProcessedTime(frameTime);
+      handleProcessing(delta);
+      // return () => handler.cancel();
+    }, throttleDelay);
+    return handler;
+  }, [handleProcessing, throttleDelay]);
 
   useEffect(
     () => throttledProcessing(currentFrameTime, processedTime),
     [currentFrameTime, processedTime, throttledProcessing],
   );
 
-  useEffect(() => {
-    const delta = currentFrameTime - (previousFrameTime ?? 0);
-    if (previousFrameTime && delta > 0) {
-      const currentFps = 1000 / delta;
-      const history = [...frameHistory].slice(0, 59);
-      history.unshift(currentFps);
-      setFrameHistory(history);
-    }
-  }, [frameHistory, currentFrameTime, previousFrameTime]);
-
-  useEffect(() => {
-    const delta = processedTime - (previousProcessedTime ?? 0);
-    if (previousProcessedTime && delta > 0) {
-      const currentFps = 1000 / delta;
-      const history = [...processingHistory].slice(0, 59);
-      history.unshift(currentFps);
-      setProcessingHistory(history);
-    }
-  }, [processingHistory, processedTime, previousProcessedTime]);
-
-  const throttledUpdateFpsUps = useMemo(
-    () =>
-      throttle((frameHistory: number[], processingHistory: number[]) => {
-        const totalFps = frameHistory.reduce((previousValue, currentValue) => previousValue + currentValue, 0);
-        const averageFps = Math.round((totalFps / frameHistory.length) * 100) / 100;
-        setFps(averageFps);
-
-        const totalUps = processingHistory.reduce((previousValue, currentValue) => previousValue + currentValue, 0);
-        const averageUps = Math.round((totalUps / processingHistory.length) * 100) / 100;
-        setUps(averageUps);
-      }, 50),
-    [],
-  );
+  // We want to throttle the fps/ups updates to smooth it out.
+  const throttledUpdateFpsUps = useMemo(() => {
+    const handler = throttle((frameHistory: number[], processingHistory: number[]) => {
+      setFps(getAverage(frameHistory));
+      setUps(getAverage(processingHistory));
+      // return () => handler.cancel();
+    }, 100);
+    return handler;
+  }, []);
 
   useEffect(
     () => throttledUpdateFpsUps(frameHistory, processingHistory),
     [frameHistory, processingHistory, throttledUpdateFpsUps],
   );
+
+  // Store deltas for frame per second calculations
+  useEffect(() => {
+    const delta = currentFrameTime - previousFrameTime;
+    if (delta <= 0) return;
+    const history = getHistory(delta, frameHistory);
+    setFrameHistory(history);
+  }, [frameHistory, currentFrameTime, previousFrameTime]);
+
+  // Store deltas for updates per second calculations
+  useEffect(() => {
+    const delta = processedTime - previousProcessedTime;
+    if (delta <= 0) return;
+    const history = getHistory(delta, processingHistory);
+    setProcessingHistory(history);
+  }, [processingHistory, processedTime, previousProcessedTime]);
 
   useEffect(() => {
     let frameId: number;

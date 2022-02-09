@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { usePlayerSlice } from '../Player/slice';
 import useGameLoop from './useGameLoop';
-
+import { EngineInfo } from './EngineInfo';
 interface EngineProps {
   children: React.ReactNode;
 }
@@ -10,26 +10,19 @@ interface EngineProps {
 export function Engine({ children }: EngineProps) {
   const { actions: playerActions } = usePlayerSlice();
   const dispatch = useDispatch();
-  const processing = useMemo(() => {
-    return (deltaMs: number) => {
+
+  const handleProcessing = useMemo(() => {
+    const handler = (deltaMs: number) => {
       console.log(`Delta: ${deltaMs}`);
       dispatch(playerActions.incrementProcessingDeltaMs(deltaMs));
     };
+    return handler;
   }, [dispatch, playerActions]);
-  const timings = useGameLoop(processing, 5000);
 
+  const timings = useGameLoop(handleProcessing, 5000);
   return (
     <>
-      Engine Loaded On: {timings.startedOn}
-      <br />
-      Current Frame Time: {timings.currentFrameTime}
-      <br />
-      Previous Frame Time: {timings.previousFrameTime}
-      <br />
-      FPS: {timings.fps}
-      <br />
-      UPS: {timings.ups}
-      <br />
+      <EngineInfo timings={timings} />
       <br />
       {children}
     </>
