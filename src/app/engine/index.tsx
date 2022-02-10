@@ -2,9 +2,9 @@ import React, { useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 
 import useGameLoop from './useGameLoop';
-import { playerActions } from '../Player/slice';
+import { playerActions } from '../player/slice';
 import { EngineInfo } from './EngineInfo';
-import log from 'utils/logger';
+import log from 'utilities/logger';
 
 interface EngineProps {
   children: React.ReactNode;

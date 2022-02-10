@@ -1,8 +1,8 @@
 import { Box } from '@mui/material';
-import { PlayerName } from 'app/components/Player/PlayerName';
+import { PlayerName } from 'app/player/PlayerName';
 import * as React from 'react';
 import { Helmet } from 'react-helmet-async';
-import buildInfo from 'utils/buildInfo';
+import buildInfo from 'utilities/buildInfo';
 
 export function HomePage() {
   return (

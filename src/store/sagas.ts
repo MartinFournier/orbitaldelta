@@ -1,6 +1,6 @@
 import { all, call, spawn } from 'redux-saga/effects';
 
-import { watchPlayerProcess } from 'app/components/Player/slice/saga';
+import { watchPlayerProcess } from 'app/player/slice/saga';
 
 export default function* rootSaga() {
   const sagas = [watchPlayerProcess];

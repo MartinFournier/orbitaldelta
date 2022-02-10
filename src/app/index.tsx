@@ -7,8 +7,8 @@ import { GlobalStyle } from 'styles/global-styles';
 import { HomePage } from './pages/HomePage/Loadable';
 import { NotFoundPage } from './pages/NotFoundPage/Loadable';
 import { useTranslation } from 'react-i18next';
-import { ErrorHandler } from './components/ErrorHandler';
-import { Engine } from './components/Engine';
+import { ErrorHandler } from './error-handler';
+import { Engine } from './engine';
 
 import { PersistGate } from 'redux-persist/integration/react';
 import { Persistor } from 'redux-persist';

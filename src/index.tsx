@@ -18,7 +18,7 @@ import 'sanitize.css/sanitize.css';
 import { App } from 'app';
 import { HelmetProvider } from 'react-helmet-async';
 import { store, persistor } from 'store';
-import reportWebVitals from 'reportWebVitals';
+import reportWebVitals from 'utilities/reportWebVitals';
 
 // Initialize languages
 import './locales/i18n';
