@@ -30,23 +30,14 @@ export function App({ persistor }: AppProps) {
         <meta name="description" content="An incremental based on automated rocketry." />
       </Helmet>
       <ErrorHandler>
-        <PersistGate
-          loading={
-            <>
-              <span>Loading...</span>
-            </>
-          }
-          persistor={persistor}
-        >
+        <PersistGate loading={<span>Loading...</span>} persistor={persistor}>
           <Engine>
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route element={<NotFoundPage />} />
             </Routes>
           </Engine>
-          <>
-            <Button onClick={persistor.flush}>Save</Button>
-          </>
+          <Button onClick={persistor.flush}>Save</Button>
         </PersistGate>
       </ErrorHandler>
       <GlobalStyle />

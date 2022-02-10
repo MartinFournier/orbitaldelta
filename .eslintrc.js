@@ -13,6 +13,7 @@ module.exports = {
   rules: {
     'prettier/prettier': ['error', prettierOptions],
     '@typescript-eslint/no-explicit-any': ['warn', { ignoreRestArgs: true }],
+    // '@typescript-eslint/explicit-function-return-type': ['warn'],
   },
   overrides: [
     {

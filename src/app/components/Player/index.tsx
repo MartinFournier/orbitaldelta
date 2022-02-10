@@ -1,4 +1,4 @@
-import { PlayerState } from './slice/types';
+import { PlayerState } from './slice';
 import log from 'utils/logger';
 
 export function updatePlayer(player: PlayerState, deltaMs: number): PlayerState {

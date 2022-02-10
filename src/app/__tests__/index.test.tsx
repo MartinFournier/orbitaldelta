@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { createRenderer } from 'react-test-renderer/shallow';
-import { persistor } from 'store/configureStore';
+import { persistor } from 'store';
 import { App } from '../index';
 
 const renderer = createRenderer();

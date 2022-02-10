@@ -1,8 +1,7 @@
 import { call, put, select, delay, takeLeading } from 'redux-saga/effects';
 import { selectPlayer } from './selectors';
-import { playerActions } from '.';
+import { playerActions, PlayerState } from '.';
 import { updatePlayer as processPlayer } from '..';
-import { PlayerState } from './types';
 import { createAction, PayloadAction } from '@reduxjs/toolkit';
 
 export const playerUpdateSaga = createAction<number>('player/playerUpdate');
@@ -14,7 +13,7 @@ export function* process(action: PayloadAction<number>) {
   // if lastUpdated > new value, abort
   // calculate duration increment
   yield put(playerActions.changeLastProcessed(new Date().getTime()));
-  yield delay(10000);
+  yield delay(10_000);
 }
 
 export function* watchPlayerProcess() {

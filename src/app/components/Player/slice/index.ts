@@ -1,11 +1,12 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { PlayerState } from './types';
 
-export const initialState: PlayerState = {
+export const initialState = {
   username: 'test',
   lastProcessedOn: 0,
   processingDeltaMs: 0,
 };
+
+export type PlayerState = typeof initialState;
 
 const slice = createSlice({
   name: 'player',

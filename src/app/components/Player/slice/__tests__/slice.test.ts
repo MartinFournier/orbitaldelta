@@ -1,8 +1,7 @@
 import * as slice from '..';
-import { PlayerState } from '../types';
 
 describe('Player slice', () => {
-  let state: PlayerState;
+  let state: slice.PlayerState;
 
   beforeEach(() => {
     state = slice.initialState;
@@ -14,7 +13,7 @@ describe('Player slice', () => {
 
   it('should handle changeUsername', () => {
     const text = 'test';
-    expect(slice.reducer(state, slice.playerActions.changeUsername(text))).toEqual<PlayerState>({
+    expect(slice.reducer(state, slice.playerActions.changeUsername(text))).toEqual<slice.PlayerState>({
       ...slice.initialState,
       username: text,
     });

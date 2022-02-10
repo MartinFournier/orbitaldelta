@@ -22,11 +22,9 @@ exports[`<App /> should render and match the snapshot 1`] = `
   <ErrorHandler>
     <PersistGate
       loading={
-        <React.Fragment>
-          <span>
-            Loading...
-          </span>
-        </React.Fragment>
+        <span>
+          Loading...
+        </span>
       }
       persistor={
         Object {
@@ -53,13 +51,11 @@ exports[`<App /> should render and match the snapshot 1`] = `
           />
         </Routes>
       </Engine>
-      <React.Fragment>
-        <ForwardRef(Button)
-          onClick={[Function]}
-        >
-          Save
-        </ForwardRef(Button)>
-      </React.Fragment>
+      <ForwardRef(Button)
+        onClick={[Function]}
+      >
+        Save
+      </ForwardRef(Button)>
     </PersistGate>
   </ErrorHandler>
   <Memo(l) />

@@ -16,8 +16,8 @@ function configureAppStore() {
   const reduxSagaMonitorOptions = {};
   const sagaMiddleware = createSagaMiddleware(reduxSagaMonitorOptions);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const middleware = (getDefaultMiddleware: any) => {
+  const middleware = (getDefaultMiddleware: unknown) => {
+    if (typeof getDefaultMiddleware !== 'function') throw new Error('Invalid middleware setup');
     const m = getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: ['persist/PERSIST', 'persist/HYDRATE', 'persist/FLUSH'],
@@ -31,7 +31,7 @@ function configureAppStore() {
 
   const store = configureStore({
     reducer: persistReducer(persistConfig, rootReducer),
-    middleware: middleware,
+    middleware,
     devTools: process.env.NODE_ENV !== 'production',
   });
 
@@ -42,5 +42,8 @@ function configureAppStore() {
 
 const store = configureAppStore();
 const persistor = persistStore(store);
-
 export { store, persistor };
+
+// Infer the `RootState` and `AppDispatch` types from the store itself
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
