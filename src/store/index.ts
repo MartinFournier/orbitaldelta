@@ -3,13 +3,18 @@ import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
 import createSagaMiddleware from 'redux-saga';
 
+import createCompressor from 'redux-persist-transform-compress';
+
 import rootReducer from './reducers';
 import rootSaga from './sagas';
 import logger from './logger';
 
+const lzCompressor = createCompressor();
+
 const persistConfig = {
-  key: 'player',
+  key: 'root',
   storage,
+  transforms: [lzCompressor],
 };
 
 function configureAppStore() {
