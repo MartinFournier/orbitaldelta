@@ -20,17 +20,47 @@ exports[`<App /> should render and match the snapshot 1`] = `
     />
   </Helmet>
   <ErrorHandler>
-    <Engine>
-      <Routes>
-        <Route
-          element={<Unknown />}
-          path="/"
-        />
-        <Route
-          element={<Unknown />}
-        />
-      </Routes>
-    </Engine>
+    <PersistGate
+      loading={
+        <React.Fragment>
+          <span>
+            Loading...
+          </span>
+        </React.Fragment>
+      }
+      persistor={
+        Object {
+          "dispatch": [Function],
+          "flush": [Function],
+          "getState": [Function],
+          "pause": [Function],
+          "persist": [Function],
+          "purge": [Function],
+          "replaceReducer": [Function],
+          "subscribe": [Function],
+          Symbol(Symbol.observable): [Function],
+        }
+      }
+    >
+      <Engine>
+        <Routes>
+          <Route
+            element={<Unknown />}
+            path="/"
+          />
+          <Route
+            element={<Unknown />}
+          />
+        </Routes>
+      </Engine>
+      <React.Fragment>
+        <ForwardRef(Button)
+          onClick={[Function]}
+        >
+          Save
+        </ForwardRef(Button)>
+      </React.Fragment>
+    </PersistGate>
   </ErrorHandler>
   <Memo(l) />
 </BrowserRouter>

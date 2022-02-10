@@ -1,7 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { PlayerState } from './types';
-import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
-import { watchPlayerProcess } from './saga';
 
 export const initialState: PlayerState = {
   username: 'test',
@@ -26,9 +24,4 @@ const slice = createSlice({
 });
 
 export const { actions: playerActions, reducer } = slice;
-
-export const usePlayerSlice = () => {
-  useInjectReducer({ key: slice.name, reducer: slice.reducer });
-  useInjectSaga({ key: slice.name, saga: watchPlayerProcess });
-  return { actions: slice.actions };
-};
+export default slice.reducer;

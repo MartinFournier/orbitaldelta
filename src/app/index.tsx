@@ -10,7 +10,15 @@ import { useTranslation } from 'react-i18next';
 import { ErrorHandler } from './components/ErrorHandler';
 import { Engine } from './components/Engine';
 
-export function App() {
+import { PersistGate } from 'redux-persist/integration/react';
+import { Persistor } from 'redux-persist';
+import { Button } from '@mui/material';
+
+interface AppProps {
+  persistor: Persistor;
+}
+
+export function App({ persistor }: AppProps) {
   const { i18n } = useTranslation();
   return (
     <BrowserRouter>
@@ -22,12 +30,24 @@ export function App() {
         <meta name="description" content="An incremental based on automated rocketry." />
       </Helmet>
       <ErrorHandler>
-        <Engine>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route element={<NotFoundPage />} />
-          </Routes>
-        </Engine>
+        <PersistGate
+          loading={
+            <>
+              <span>Loading...</span>
+            </>
+          }
+          persistor={persistor}
+        >
+          <Engine>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route element={<NotFoundPage />} />
+            </Routes>
+          </Engine>
+          <>
+            <Button onClick={persistor.flush}>Save</Button>
+          </>
+        </PersistGate>
       </ErrorHandler>
       <GlobalStyle />
     </BrowserRouter>

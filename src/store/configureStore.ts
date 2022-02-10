@@ -1,38 +1,46 @@
-/**
- * Create the store with dynamic reducers
- */
-
-import { configureStore, getDefaultMiddleware, StoreEnhancer } from '@reduxjs/toolkit';
-import { createInjectorsEnhancer } from 'redux-injectors';
-import logger from './logger';
+import { configureStore } from '@reduxjs/toolkit';
+import storage from 'redux-persist/lib/storage';
+import { persistReducer, persistStore } from 'redux-persist';
 import createSagaMiddleware from 'redux-saga';
 
-import { createReducer } from './reducers';
+import rootReducer from './reducers';
+import rootSaga from './sagas';
+import logger from './logger';
 
-export function configureAppStore() {
+const persistConfig = {
+  key: 'player',
+  storage,
+};
+
+function configureAppStore() {
   const reduxSagaMonitorOptions = {};
   const sagaMiddleware = createSagaMiddleware(reduxSagaMonitorOptions);
-  const { run: runSaga } = sagaMiddleware;
 
-  const sagaMiddlewares = [sagaMiddleware];
-  const middleware = [...getDefaultMiddleware(), ...sagaMiddlewares];
-  if (process.env.NODE_ENV !== 'production') {
-    middleware.push(logger);
-  }
-
-  const enhancers = [
-    createInjectorsEnhancer({
-      createReducer,
-      runSaga,
-    }),
-  ] as StoreEnhancer[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const middleware = (getDefaultMiddleware: any) => {
+    const m = getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: ['persist/PERSIST', 'persist/HYDRATE', 'persist/FLUSH'],
+      },
+    }).concat(...[sagaMiddleware]);
+    if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'test') {
+      m.push(logger);
+    }
+    return m;
+  };
 
   const store = configureStore({
-    reducer: createReducer(),
-    middleware,
+    reducer: persistReducer(persistConfig, rootReducer),
+    middleware: middleware,
     devTools: process.env.NODE_ENV !== 'production',
-    enhancers,
   });
+
+  sagaMiddleware.run(rootSaga);
 
   return store;
 }
+
+const store = configureAppStore();
+const persistor = persistStore(store);
+
+export { store, persistor };

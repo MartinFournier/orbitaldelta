@@ -21,6 +21,7 @@ const config: Config.InitialOptions = {
   moduleNameMapper: {
     '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy',
     '^react-native$': 'react-native-web',
+    '@mui/styled-engine': '@mui/styled-engine-sc',
   },
   modulePaths: ['<rootDir>/src'],
   resetMocks: true,
@@ -31,8 +32,8 @@ const config: Config.InitialOptions = {
   testMatch: ['<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}', '<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}'],
   transform: {
     '^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)': '<rootDir>/internals/config/jest/fileTransform.js',
-    '^.+\\.(js|jsx|mjs|cjs|ts|tsx)$': '<rootDir>/internals//config/jest/babelTransform.js',
-    '^.+\\.css$': '<rootDir>/internals//config/jest/cssTransform.js',
+    '^.+\\.(js|jsx|mjs|cjs|ts|tsx)$': '<rootDir>/internals/config/jest/babelTransform.js',
+    '^.+\\.css$': '<rootDir>/internals/config/jest/cssTransform.js',
   },
   transformIgnorePatterns: [
     '[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|cjs|ts|tsx)$',
