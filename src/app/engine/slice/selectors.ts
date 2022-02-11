@@ -9,3 +9,4 @@ export const selectIsGameSaving = createSelector([domain], state => state.isGame
 export const selectGameSavedOn = createSelector([domain], state =>
   state.gameSavedOn ? new Date(state.gameSavedOn).toLocaleString() : 'n/a',
 );
+export const selectShowEngineStats = createSelector([domain], state => state.showEngineStats);

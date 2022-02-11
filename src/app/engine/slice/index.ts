@@ -1,8 +1,9 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 
 export const initialState = {
   gameSavedOn: 0,
   isGameSaving: false,
+  showEngineStats: false,
 };
 
 export type EngineState = typeof initialState;
@@ -17,7 +18,11 @@ export const saveGame = createAsyncThunk('engine/saveGame', async (saveFn: () =>
 const slice = createSlice({
   name: 'engine',
   initialState,
-  reducers: {},
+  reducers: {
+    changeShowEngineStats(state, action: PayloadAction<boolean>) {
+      state.showEngineStats = action.payload;
+    },
+  },
   extraReducers: builder => {
     builder.addCase(saveGame.pending, state => {
       state.isGameSaving = true;
