@@ -20,6 +20,7 @@ export function EngineInfo({ timings }: EngineInfoProps) {
   if (!engineTimings) return <></>;
   return (
     <>
+      <br />
       Engine Load Time: {engineTimings.startedOn}
       <br />
       Current Frame Time: {engineTimings.currentFrameTime}

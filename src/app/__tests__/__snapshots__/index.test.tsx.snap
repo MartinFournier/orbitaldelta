@@ -43,19 +43,22 @@ exports[`<App /> should render and match the snapshot 1`] = `
       <Engine>
         <Routes>
           <Route
-            element={<Unknown />}
+            element={
+              <Unknown
+                saveFn={[Function]}
+              />
+            }
             path="/"
+          />
+          <Route
+            element={<SettingsPage />}
+            path="/settings"
           />
           <Route
             element={<Unknown />}
           />
         </Routes>
       </Engine>
-      <ForwardRef(Button)
-        onClick={[Function]}
-      >
-        Save
-      </ForwardRef(Button)>
     </PersistGate>
   </ErrorHandler>
   <Memo(l) />

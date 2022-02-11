@@ -9,4 +9,8 @@ export const selectAutosave = createSelector([domain], state => ({
   frequencyMs: state.autosaveFrequencyMs,
 }));
 
+export const selectAutosaveEnabled = createSelector([domain], state => state.autosaveEnabled);
+
+export const selectAutosaveFrequencyMins = createSelector([domain], state => state.autosaveFrequencyMs / (1000 * 60));
+
 export type SelectAutosaveType = ReturnType<typeof selectAutosave>;

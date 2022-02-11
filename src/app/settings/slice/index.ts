@@ -7,7 +7,7 @@ export const initialState = {
 
 export type SettingsState = typeof initialState;
 
-declare type AutosavePayload = Pick<SettingsState, 'autosaveEnabled'> & {
+export declare type AutosavePayload = Pick<SettingsState, 'autosaveEnabled'> & {
   autosaveFrequencyMinutes: number;
 };
 
@@ -17,7 +17,7 @@ const slice = createSlice({
   reducers: {
     changeAutosave(state, action: PayloadAction<AutosavePayload>) {
       state.autosaveEnabled = action.payload.autosaveEnabled;
-      state.autosaveFrequencyMs = action.payload.autosaveFrequencyMinutes / (1000 * 60);
+      state.autosaveFrequencyMs = action.payload.autosaveFrequencyMinutes * (1000 * 60);
     },
   },
 });
