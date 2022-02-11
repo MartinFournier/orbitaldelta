@@ -5,6 +5,7 @@ import createCompressor from 'redux-persist-transform-compress';
 import { persistReducer, persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
 import rootReducer from './reducers';
 import rootSaga from './sagas';
+import { devtoolBlackListedActions } from './devTool';
 
 const isDev = process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'test';
 
@@ -22,23 +23,28 @@ const persistConfig = {
   debug: isDev,
 };
 
-const reduxSagaMonitorOptions = {};
-const sagaMiddleware = createSagaMiddleware(reduxSagaMonitorOptions);
+function setupStore() {
+  const reduxSagaMonitorOptions = {};
+  const sagaMiddleware = createSagaMiddleware(reduxSagaMonitorOptions);
 
-const store = configureStore({
-  reducer: persistReducer(persistConfig, rootReducer),
-  middleware: getDefaultMiddleware =>
-    getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
-    }).concat(sagaMiddleware),
-  devTools: isDev,
-});
+  const store = configureStore({
+    reducer: persistReducer(persistConfig, rootReducer),
+    middleware: getDefaultMiddleware =>
+      getDefaultMiddleware({
+        serializableCheck: {
+          ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        },
+      }).concat(sagaMiddleware),
+    devTools: { actionsBlacklist: devtoolBlackListedActions },
+  });
 
-sagaMiddleware.run(rootSaga);
+  sagaMiddleware.run(rootSaga);
 
-const persistor = persistStore(store);
+  const persistor = persistStore(store);
+  return { store, persistor };
+}
+
+const { store, persistor } = setupStore();
 export { store, persistor };
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
