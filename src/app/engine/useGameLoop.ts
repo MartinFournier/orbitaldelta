@@ -27,7 +27,10 @@ const getHistory = (deltaMs: number, history: number[]) => {
 
 const getAverage = (history: number[]) => {
   if (history.length === 0) return 0;
-  const total = history.reduce((previousValue, currentValue) => previousValue + currentValue, 0);
+  const total = history.reduce(
+    (previousValue, currentValue) => previousValue + currentValue,
+    0,
+  );
   const avg = Math.round((total / history.length) * 100) / 100;
   return avg;
 };
@@ -38,7 +41,10 @@ const getAverage = (history: number[]) => {
  * @param throttleDelay How frequently the processing should be triggered
  * @returns The timings information
  */
-const useGameLoop = (handleProcessing: (deltaMs: number) => void, throttleDelay: number): Timings => {
+const useGameLoop = (
+  handleProcessing: (deltaMs: number) => void,
+  throttleDelay: number,
+): Timings => {
   const [startedOn] = useState<number>(performance.now());
   const [currentFrameTime, setCurrentFrameTime] = useState<number>(0);
   const previousFrameTime = usePrevious(currentFrameTime);
@@ -67,11 +73,14 @@ const useGameLoop = (handleProcessing: (deltaMs: number) => void, throttleDelay:
 
   // We want to throttle the fps/ups updates to smooth it out.
   const throttledUpdateFpsUps = useMemo(() => {
-    const handler = throttle((frameHistory: number[], processingHistory: number[]) => {
-      setFps(getAverage(frameHistory));
-      setUps(getAverage(processingHistory));
-      // return () => handler.cancel();
-    }, 100);
+    const handler = throttle(
+      (frameHistory: number[], processingHistory: number[]) => {
+        setFps(getAverage(frameHistory));
+        setUps(getAverage(processingHistory));
+        // return () => handler.cancel();
+      },
+      100,
+    );
     return handler;
   }, []);
 

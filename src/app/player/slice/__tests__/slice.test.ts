@@ -13,7 +13,9 @@ describe('Player slice', () => {
 
   it('should handle changeUsername', () => {
     const text = 'test';
-    expect(slice.reducer(state, slice.playerActions.changeUsername(text))).toEqual<slice.PlayerState>({
+    expect(
+      slice.reducer(state, slice.playerActions.changeUsername(text)),
+    ).toEqual<slice.PlayerState>({
       ...slice.initialState,
       username: text,
     });

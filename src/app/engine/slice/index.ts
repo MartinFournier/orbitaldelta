@@ -8,12 +8,15 @@ export const initialState = {
 
 export type EngineState = typeof initialState;
 
-export const saveGame = createAsyncThunk('engine/saveGame', async (saveFn: () => Promise<unknown>) => {
-  await saveFn();
-  return {
-    completedOn: new Date().getTime(),
-  };
-});
+export const saveGame = createAsyncThunk(
+  'engine/saveGame',
+  async (saveFn: () => Promise<unknown>) => {
+    await saveFn();
+    return {
+      completedOn: new Date().getTime(),
+    };
+  },
+);
 
 const slice = createSlice({
   name: 'engine',

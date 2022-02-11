@@ -6,4 +6,6 @@ export type ConvertedToObjectType<T> = {
 };
 
 // Selecting the json file that our intellisense would pick from
-export type TranslationJsonType = typeof import('./en/translation.json') & { [index: string]: unknown };
+export type TranslationJsonType = typeof import('./en/translation.json') & {
+  [index: string]: unknown;
+};

@@ -22,11 +22,21 @@ export function SaveGameButton({ saveFn: flush }: ButtonProps) {
   return (
     <Tooltip title={<span>Saved on: {savedOn}</span>}>
       <span>
-        <Button disabled={isSaving} startIcon={<SaveIcon />} onClick={onButtonClick}>
+        <Button
+          disabled={isSaving}
+          startIcon={<SaveIcon />}
+          onClick={onButtonClick}
+        >
           {isSaving && (
             <CircularProgress
               size={24}
-              sx={{ position: 'absolute', top: '50%', left: '50%', marginTop: '-12px', marginLeft: '-12px' }}
+              sx={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                marginTop: '-12px',
+                marginLeft: '-12px',
+              }}
             />
           )}
           <span>Save</span>

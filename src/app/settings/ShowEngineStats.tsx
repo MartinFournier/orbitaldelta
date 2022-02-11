@@ -8,9 +8,18 @@ export function ShowEngineStats() {
   const dispatch = useAppDispatch();
   const showEngineStats = useAppSelector(selectShowEngineStats);
 
-  const onChange = (evt: React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
+  const onChange = (
+    evt: React.ChangeEvent<HTMLInputElement>,
+    checked: boolean,
+  ) => {
     dispatch(engineAction.changeShowEngineStats(checked));
   };
 
-  return <AppCheckbox label="Show Engine Stats" value={showEngineStats} onChange={onChange} />;
+  return (
+    <AppCheckbox
+      label="Show Engine Stats"
+      value={showEngineStats}
+      onChange={onChange}
+    />
+  );
 }

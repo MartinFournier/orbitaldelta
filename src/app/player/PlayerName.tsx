@@ -13,5 +13,12 @@ export function PlayerName() {
     dispatch(playerActions.changeUsername(evt.currentTarget.value));
   };
 
-  return <TextField type="text" placeholder="Username" value={username} onChange={onChangeUsername} />;
+  return (
+    <TextField
+      type="text"
+      placeholder="Username"
+      value={username}
+      onChange={onChangeUsername}
+    />
+  );
 }

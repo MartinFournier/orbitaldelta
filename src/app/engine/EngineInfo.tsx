@@ -9,10 +9,16 @@ declare type EngineInfoProps = {
 const maxRefresh = 50;
 
 export function EngineInfo({ timings }: EngineInfoProps) {
-  const [engineTimings, setEngineTimings] = useState<Timings | undefined>(timings);
+  const [engineTimings, setEngineTimings] = useState<Timings | undefined>(
+    timings,
+  );
 
   const throttledTimings = useMemo(
-    () => throttle((newTimings: Timings) => setEngineTimings(newTimings), maxRefresh),
+    () =>
+      throttle(
+        (newTimings: Timings) => setEngineTimings(newTimings),
+        maxRefresh,
+      ),
     [],
   );
   useEffect(() => throttledTimings(timings), [timings, throttledTimings]);

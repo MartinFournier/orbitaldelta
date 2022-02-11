@@ -6,5 +6,7 @@ interface AppCheckboxProps extends CheckboxProps {
 }
 
 export function AppCheckbox({ label, ...otherProps }: AppCheckboxProps) {
-  return <FormControlLabel control={<Checkbox {...otherProps} />} label={label} />;
+  return (
+    <FormControlLabel control={<Checkbox {...otherProps} />} label={label} />
+  );
 }

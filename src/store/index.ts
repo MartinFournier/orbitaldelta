@@ -2,12 +2,22 @@ import { configureStore } from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage';
 import createSagaMiddleware from 'redux-saga';
 import createCompressor from 'redux-persist-transform-compress';
-import { persistReducer, persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
+import {
+  persistReducer,
+  persistStore,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist';
 import rootReducer from './reducers';
 import rootSaga from './sagas';
 import { devtoolBlackListedActions } from './devTool';
 
-const isDev = process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'test';
+const isDev =
+  process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'test';
 
 const lzCompressor = createCompressor();
 const transforms = [];

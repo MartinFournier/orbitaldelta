@@ -4,11 +4,18 @@ const path = require('path');
 process.env.BABEL_ENV = 'development';
 process.env.NODE_ENV = 'development';
 
-const prettierOptions = JSON.parse(fs.readFileSync(path.resolve(__dirname, '.prettierrc'), 'utf8'));
+const prettierOptions = JSON.parse(
+  fs.readFileSync(path.resolve(__dirname, '.prettierrc'), 'utf8'),
+);
 
 module.exports = {
   parser: '@typescript-eslint/parser',
-  extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended', 'react-app', 'prettier'],
+  extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'react-app',
+    'prettier',
+  ],
   plugins: ['@typescript-eslint', 'prettier'],
   rules: {
     'prettier/prettier': ['error', prettierOptions],

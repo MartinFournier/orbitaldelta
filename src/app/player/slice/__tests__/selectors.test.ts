@@ -11,7 +11,9 @@ describe('Player selectors', () => {
   });
 
   it('should select the initial state', () => {
-    expect(selectors.selectUsername(state as any)).toEqual(initialState.username);
+    expect(selectors.selectUsername(state as any)).toEqual(
+      initialState.username,
+    );
   });
 
   it('should select username', () => {

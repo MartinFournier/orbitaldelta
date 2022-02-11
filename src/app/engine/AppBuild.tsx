@@ -4,7 +4,11 @@ import buildInfo from 'utilities/buildInfo';
 
 const baseUrl = 'https://github.com/MartinFournier/orbitaltarget/commit';
 
-const shortFormatter = new Intl.DateTimeFormat('en-GB', { month: '2-digit', day: '2-digit', year: 'numeric' });
+const shortFormatter = new Intl.DateTimeFormat('en-GB', {
+  month: '2-digit',
+  day: '2-digit',
+  year: 'numeric',
+});
 const detailedFormatter = new Intl.DateTimeFormat('en-GB', {
   year: 'numeric',
   month: 'numeric',

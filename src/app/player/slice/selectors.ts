@@ -7,4 +7,7 @@ const domain = (state: RootState): PlayerState => state.player || initialState;
 
 export const selectPlayer = createSelector([domain], state => state);
 export const selectUsername = createSelector([domain], state => state.username);
-export const selectLastProcessedOn = createSelector([domain], state => state.lastProcessedOn);
+export const selectLastProcessedOn = createSelector(
+  [domain],
+  state => state.lastProcessedOn,
+);

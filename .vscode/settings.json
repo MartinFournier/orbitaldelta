@@ -4,7 +4,15 @@
   "less.validate": false,
   "scss.validate": false,
   "stylelint.enable": true,
-  "stylelint.validate": ["css", "postcss", "scss", "javascriptreact", "typescriptreact", "javascript", "typescript"],
+  "stylelint.validate": [
+    "css",
+    "postcss",
+    "scss",
+    "javascriptreact",
+    "typescriptreact",
+    "javascript",
+    "typescript"
+  ],
   "workbench.editor.labelFormat": "medium",
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",

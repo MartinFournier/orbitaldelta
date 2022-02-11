@@ -2,7 +2,11 @@ process.env.BABEL_ENV = 'development';
 process.env.NODE_ENV = 'development';
 
 module.exports = {
-  extends: ['stylelint-config-recommended-scss', 'stylelint-config-prettier', 'stylelint-config-styled-components'],
+  extends: [
+    'stylelint-config-recommended-scss',
+    'stylelint-config-prettier',
+    'stylelint-config-styled-components',
+  ],
   rules: {},
 
   overrides: [

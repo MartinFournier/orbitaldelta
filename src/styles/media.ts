@@ -25,16 +25,19 @@ export const sizes = {
 };
 
 // Iterate through the sizes and create a media template
-export const media = (Object.keys(sizes) as Array<keyof typeof sizes>).reduce((acc, label) => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  acc[label] = (first: any, ...interpolations: any[]) => css`
-    @media (min-width: ${sizes[label]}px) {
-      ${css(first, ...interpolations)}
-    }
-  `;
+export const media = (Object.keys(sizes) as Array<keyof typeof sizes>).reduce(
+  (acc, label) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    acc[label] = (first: any, ...interpolations: any[]) => css`
+      @media (min-width: ${sizes[label]}px) {
+        ${css(first, ...interpolations)}
+      }
+    `;
 
-  return acc;
-}, {} as { [key in keyof typeof sizes]: MediaFunction });
+    return acc;
+  },
+  {} as { [key in keyof typeof sizes]: MediaFunction },
+);
 
 /*
  * @types/styled-component is not working properly as explained in the github issue referenced above.
@@ -42,7 +45,10 @@ export const media = (Object.keys(sizes) as Array<keyof typeof sizes>).reduce((a
  * Be carefull and keep an eye on the issue and the possible improvements
  */
 type MediaFunction = <P extends object>(
-  first: TemplateStringsArray | CSSObject | InterpolationFunction<ThemedStyledProps<P, DefaultTheme>>,
+  first:
+    | TemplateStringsArray
+    | CSSObject
+    | InterpolationFunction<ThemedStyledProps<P, DefaultTheme>>,
   ...interpolations: Array<Interpolation<ThemedStyledProps<P, DefaultTheme>>>
 ) => FlattenInterpolation<ThemedStyledProps<P, DefaultTheme>>;
 

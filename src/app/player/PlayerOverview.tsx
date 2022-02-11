@@ -14,8 +14,11 @@ export function PlayerOverview() {
   };
 
   return (
-    <>
-      <TextField type="text" placeholder="Username" value={username} onChange={onChangeUsername} />
-    </>
+    <TextField
+      type="text"
+      placeholder="Username"
+      value={username}
+      onChange={onChangeUsername}
+    />
   );
 }

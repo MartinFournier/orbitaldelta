@@ -31,7 +31,11 @@ interface ErrorHandlerProps {
 
 export function ErrorHandler({ children }: ErrorHandlerProps) {
   return (
-    <ErrorBoundary FallbackComponent={ErrorFallback} onError={errorHandler} onReset={resetHandler}>
+    <ErrorBoundary
+      FallbackComponent={ErrorFallback}
+      onError={errorHandler}
+      onReset={resetHandler}
+    >
       {children}
     </ErrorBoundary>
   );

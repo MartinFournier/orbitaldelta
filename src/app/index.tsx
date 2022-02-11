@@ -27,7 +27,10 @@ export function App({ persistor }: AppProps) {
         defaultTitle="Orbital Target"
         htmlAttributes={{ lang: i18n.language }}
       >
-        <meta name="description" content="An incremental based on automated rocketry." />
+        <meta
+          name="description"
+          content="An incremental based on automated rocketry."
+        />
       </Helmet>
       <ErrorHandler>
         <PersistGate loading={<span>Loading...</span>} persistor={persistor}>

@@ -1,6 +1,9 @@
 import { select, delay, putResolve } from 'redux-saga/effects';
 import { saveGame } from '.';
-import { selectAutosave, SelectAutosaveType } from 'app/settings/slice/selectors';
+import {
+  selectAutosave,
+  SelectAutosaveType,
+} from 'app/settings/slice/selectors';
 import { persistor } from 'store';
 
 export function* autosave() {

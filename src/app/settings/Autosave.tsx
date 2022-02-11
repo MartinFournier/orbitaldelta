@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 import { AppCheckbox } from 'app/common/AppCheckbox';
-import { selectAutosaveEnabled, selectAutosaveFrequencyMins } from './slice/selectors';
+import {
+  selectAutosaveEnabled,
+  selectAutosaveFrequencyMins,
+} from './slice/selectors';
 import { settingsActions, AutosavePayload } from './slice';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { Typography } from '@mui/material';
@@ -13,7 +16,10 @@ export default function AutosaveSlider() {
   const autosaveFrequency = useAppSelector(selectAutosaveFrequencyMins);
   const [frequency, setFrequency] = useState(autosaveFrequency);
 
-  const handleChangeAutosave = (e: React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
+  const handleChangeAutosave = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    checked: boolean,
+  ) => {
     const payload: AutosavePayload = {
       autosaveEnabled: checked,
       autosaveFrequencyMinutes: autosaveFrequency,
@@ -21,11 +27,17 @@ export default function AutosaveSlider() {
     dispatch(settingsActions.changeAutosave(payload));
   };
 
-  const handleChangeFrequency = (e: React.SyntheticEvent | Event, value: number | number[]) => {
+  const handleChangeFrequency = (
+    e: React.SyntheticEvent | Event,
+    value: number | number[],
+  ) => {
     setFrequency(value as number);
   };
 
-  const handleCommitFrequency = (e: React.SyntheticEvent | Event, value: number | number[]) => {
+  const handleCommitFrequency = (
+    e: React.SyntheticEvent | Event,
+    value: number | number[],
+  ) => {
     const payload: AutosavePayload = {
       autosaveEnabled,
       autosaveFrequencyMinutes: value as number,
@@ -60,7 +72,11 @@ export default function AutosaveSlider() {
         onChange={handleChangeFrequency}
         onChangeCommitted={handleCommitFrequency}
       />
-      <AppCheckbox label="Enable Autosave" value={autosaveEnabled} onChange={handleChangeAutosave} />
+      <AppCheckbox
+        label="Enable Autosave"
+        value={autosaveEnabled}
+        onChange={handleChangeAutosave}
+      />
     </Box>
   );
 }
