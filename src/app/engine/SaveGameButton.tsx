@@ -9,10 +9,10 @@ import { selectGameSavedOn, selectIsGameSaving } from './slice/selectors';
 import { saveGame } from './slice';
 
 interface ButtonProps extends MuiButtonProps {
-  flush: () => Promise<void>;
+  saveFn: () => Promise<unknown>;
 }
 
-export function SaveGameButton({ flush }: ButtonProps) {
+export function SaveGameButton({ saveFn: flush }: ButtonProps) {
   const dispatch = useAppDispatch();
   const savedOn = useAppSelector(selectGameSavedOn);
   const isSaving = useAppSelector(selectIsGameSaving);

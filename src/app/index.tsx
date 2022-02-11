@@ -12,7 +12,7 @@ import { Engine } from './engine';
 
 import { PersistGate } from 'redux-persist/integration/react';
 import { Persistor } from 'redux-persist';
-import { SaveGameButton } from './engine/SaveGameButton';
+import { SettingsPage } from './pages/SettingsPage';
 
 interface AppProps {
   persistor: Persistor;
@@ -33,11 +33,11 @@ export function App({ persistor }: AppProps) {
         <PersistGate loading={<span>Loading...</span>} persistor={persistor}>
           <Engine>
             <Routes>
-              <Route path="/" element={<HomePage />} />
+              <Route path="/" element={<HomePage saveFn={persistor.flush} />} />
+              <Route path="/settings" element={<SettingsPage />} />
               <Route element={<NotFoundPage />} />
             </Routes>
           </Engine>
-          <SaveGameButton flush={persistor.flush} />
         </PersistGate>
       </ErrorHandler>
       <GlobalStyle />

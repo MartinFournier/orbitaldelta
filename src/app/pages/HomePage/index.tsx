@@ -1,10 +1,15 @@
-import { Box } from '@mui/material';
+import { Box, Link } from '@mui/material';
+import { SaveGameButton } from 'app/engine/SaveGameButton';
 import { PlayerName } from 'app/player/PlayerName';
 import * as React from 'react';
 import { Helmet } from 'react-helmet-async';
 import buildInfo from 'utilities/buildInfo';
 
-export function HomePage() {
+declare type HomeProps = {
+  saveFn: () => Promise<unknown>;
+};
+
+export function HomePage({ saveFn }: HomeProps) {
   return (
     <>
       <Helmet>
@@ -18,7 +23,9 @@ export function HomePage() {
       </Box>
       <Box>
         <PlayerName />
+        <SaveGameButton saveFn={saveFn} />
       </Box>
+      <Link href="/settings">Settings</Link>
     </>
   );
 }
