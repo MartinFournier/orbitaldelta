@@ -5,7 +5,7 @@
   "scss.validate": false,
   "stylelint.enable": true,
   "stylelint.validate": ["css", "postcss", "scss", "javascriptreact", "typescriptreact", "javascript", "typescript"],
-  "workbench.editor.labelFormat": "short",
+  "workbench.editor.labelFormat": "medium",
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true

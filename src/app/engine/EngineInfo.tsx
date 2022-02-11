@@ -2,9 +2,9 @@ import React, { useMemo, useState, useEffect } from 'react';
 import throttle from 'lodash/throttle';
 import { Timings } from './useGameLoop';
 
-interface EngineInfoProps {
+declare type EngineInfoProps = {
   timings: Timings;
-}
+};
 
 const maxRefresh = 50;
 

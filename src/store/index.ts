@@ -1,54 +1,46 @@
 import { configureStore } from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage';
-import { persistReducer, persistStore } from 'redux-persist';
 import createSagaMiddleware from 'redux-saga';
-
 import createCompressor from 'redux-persist-transform-compress';
-
+import { persistReducer, persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
 import rootReducer from './reducers';
 import rootSaga from './sagas';
-import logger from './logger';
+
+const isDev = process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'test';
 
 const lzCompressor = createCompressor();
+const transforms = [];
+if (!isDev) transforms.push(lzCompressor);
 
 const persistConfig = {
   key: 'root',
+  keyPrefix: 'orbital',
+  version: 1,
   storage,
-  transforms: [lzCompressor],
+  transforms,
+  throttle: 100,
+  debug: isDev,
 };
 
-function configureAppStore() {
-  const reduxSagaMonitorOptions = {};
-  const sagaMiddleware = createSagaMiddleware(reduxSagaMonitorOptions);
+const reduxSagaMonitorOptions = {};
+const sagaMiddleware = createSagaMiddleware(reduxSagaMonitorOptions);
 
-  const middleware = (getDefaultMiddleware: unknown) => {
-    if (typeof getDefaultMiddleware !== 'function') throw new Error('Invalid middleware setup');
-    const m = getDefaultMiddleware({
+const store = configureStore({
+  reducer: persistReducer(persistConfig, rootReducer),
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
       serializableCheck: {
-        ignoredActions: ['persist/PERSIST', 'persist/HYDRATE', 'persist/FLUSH'],
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(...[sagaMiddleware]);
-    if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'test') {
-      m.push(logger);
-    }
-    return m;
-  };
+    }).concat(sagaMiddleware),
+  devTools: isDev,
+});
 
-  const store = configureStore({
-    reducer: persistReducer(persistConfig, rootReducer),
-    middleware,
-    devTools: process.env.NODE_ENV !== 'production',
-  });
+sagaMiddleware.run(rootSaga);
 
-  sagaMiddleware.run(rootSaga);
-
-  return store;
-}
-
-const store = configureAppStore();
 const persistor = persistStore(store);
 export { store, persistor };
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
-export type RootState = ReturnType<typeof store.getState>;
+export type RootState = ReturnType<typeof rootReducer>;
 export type AppDispatch = typeof store.dispatch;

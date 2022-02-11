@@ -12,7 +12,7 @@ import { Engine } from './engine';
 
 import { PersistGate } from 'redux-persist/integration/react';
 import { Persistor } from 'redux-persist';
-import { Button } from '@mui/material';
+import { SaveGameButton } from './engine/SaveGameButton';
 
 interface AppProps {
   persistor: Persistor;
@@ -37,7 +37,7 @@ export function App({ persistor }: AppProps) {
               <Route element={<NotFoundPage />} />
             </Routes>
           </Engine>
-          <Button onClick={persistor.flush}>Save</Button>
+          <SaveGameButton flush={persistor.flush} />
         </PersistGate>
       </ErrorHandler>
       <GlobalStyle />
