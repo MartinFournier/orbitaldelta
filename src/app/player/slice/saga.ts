@@ -3,6 +3,7 @@ import { selectPlayer } from './selectors';
 import { playerActions, PlayerState } from '.';
 import { updatePlayer as processPlayer } from '..';
 import { createAction, PayloadAction } from '@reduxjs/toolkit';
+import toastActions from 'app/common/Toasts';
 
 export const playerUpdateSaga = createAction<number>('player/playerUpdate');
 
@@ -17,6 +18,7 @@ export function* process(action: PayloadAction<number>) {
   // if lastUpdated > new value, abort
   // calculate duration increment
   yield put(playerActions.changeLastProcessed(new Date().getTime()));
+  toastActions.success('Player Update', { autoHideDuration: 1000 });
   yield delay(10_000);
 }
 

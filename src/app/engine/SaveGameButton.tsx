@@ -7,7 +7,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { selectGameSavedOn, selectIsGameSaving } from './slice/selectors';
 import { saveGame } from './slice';
-
+import { notifications } from 'app/common/Toasts';
 interface ButtonProps extends MuiButtonProps {
   saveFn: () => Promise<unknown>;
 }
@@ -16,8 +16,10 @@ export function SaveGameButton({ saveFn: flush }: ButtonProps) {
   const dispatch = useAppDispatch();
   const savedOn = useAppSelector(selectGameSavedOn);
   const isSaving = useAppSelector(selectIsGameSaving);
+
   const onButtonClick = async () => {
-    dispatch(saveGame(flush));
+    await dispatch(saveGame(flush));
+    notifications.gameSaved();
   };
   return (
     <Tooltip title={<span>Saved on: {savedOn}</span>}>

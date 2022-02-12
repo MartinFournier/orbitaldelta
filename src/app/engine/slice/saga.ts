@@ -5,6 +5,7 @@ import {
   SelectAutosaveType,
 } from 'app/settings/slice/selectors';
 import { persistor } from 'store';
+import { notifications } from 'app/common/Toasts';
 
 export function* autosave() {
   while (true) {
@@ -12,6 +13,7 @@ export function* autosave() {
     yield delay(autosave.frequencyMs);
     if (autosave.enabled) {
       yield putResolve(saveGame(persistor.flush) as never);
+      notifications.gameSaved();
     }
   }
 }
