@@ -12,6 +12,9 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { Tooltip } from '@mui/material';
 import { AppBuild } from 'app/engine/AppBuild';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
+import { selectSidebarCollapsed } from 'app/settings/slice/selectors';
+import { settingsActions } from 'app/settings/slice';
 
 declare type AppDrawerProps = {
   children: React.ReactNode;
@@ -41,15 +44,6 @@ const closedMixin = (theme: Theme) => ({
   },
 });
 
-const DrawerHeader = styled('div')(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'flex-end',
-  padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
-  ...theme.mixins.toolbar,
-}));
-
 const Drawer = styled(MuiDrawer)(({ theme, open }) => ({
   width: drawerWidth,
   flexShrink: 0,
@@ -66,16 +60,23 @@ const Drawer = styled(MuiDrawer)(({ theme, open }) => ({
 }));
 
 export default function AppDrawer({ children, pageContent }: AppDrawerProps) {
-  const [opened, setOpened] = React.useState(true);
+  const dispatch = useAppDispatch();
+  const sidebarCollapsed = useAppSelector(selectSidebarCollapsed);
+  const [collapsed, setCollapsed] = React.useState(sidebarCollapsed);
+
+  const handleToggle = () => {
+    setCollapsed(!collapsed);
+    dispatch(settingsActions.changeSidebarCollapsed(!collapsed));
+  };
 
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <Drawer variant="permanent" open={opened}>
+      <Drawer variant="permanent" open={!collapsed}>
         <List>
-          <ListItem button onClick={() => setOpened(!opened)} key="header">
+          <ListItem button onClick={handleToggle} key="header">
             <ListItemIcon>
-              {opened ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+              {collapsed ? <ChevronRightIcon /> : <ChevronLeftIcon />}
             </ListItemIcon>
             <Tooltip
               title={<AppBuild noLink />}
@@ -90,9 +91,8 @@ export default function AppDrawer({ children, pageContent }: AppDrawerProps) {
         <Divider />
         {children}
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <DrawerHeader />
-        {pageContent}
+      <Box component="main" sx={{ flexGrow: 1, minHeight: '100vh' }}>
+        <Box sx={{ p: 2 }}>{pageContent}</Box>
       </Box>
     </Box>
   );

@@ -85,8 +85,10 @@ export default function NavigationPage({ children }: NavigationPageProps) {
       />
     ))
     .reduce(
-      (result, current) =>
-        result.length === 0 ? [current] : [...result, <Divider />, current],
+      (result, current, index) =>
+        result.length === 0
+          ? [current]
+          : [...result, <Divider key={`divider-${index}`} />, current],
       [] as JSX.Element[],
     );
 

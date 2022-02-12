@@ -12,8 +12,12 @@ export function HomePage({ saveFn }: HomeProps) {
   return (
     <Page title="Home Page">
       <Box>
-        <PlayerName />
-        <SaveGameButton saveFn={saveFn} />
+        <Box>
+          <PlayerName />
+        </Box>
+        <Box sx={{ my: 4 }}>
+          <SaveGameButton saveFn={saveFn} size="large" />
+        </Box>
       </Box>
     </Page>
   );

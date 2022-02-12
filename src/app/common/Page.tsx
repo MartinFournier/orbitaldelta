@@ -19,9 +19,11 @@ export function Page(props: PageProps) {
       </Helmet>
       <NavigationPage>
         <>
-          <Typography>{props.title}</Typography>
+          <Typography variant="h4" sx={{ mb: 2 }}>
+            {props.title}
+          </Typography>
           {props.children}
-          <Box sx={{ mt: 2 }}>
+          <Box sx={{ mt: 2, fontSize: '0.8em' }}>
             <AppBuild />
           </Box>
         </>

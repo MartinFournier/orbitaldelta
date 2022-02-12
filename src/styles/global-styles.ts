@@ -8,13 +8,12 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Fira Code', 'Helvetica Neue', Helvetica, Arial, sans-serif
   }
 
   #root {
     min-height: 100%;
     min-width: 100%;
-    padding: 1em;
   }
 
   p,

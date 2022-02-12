@@ -20,4 +20,9 @@ export const selectAutosaveFrequencyMins = createSelector(
   state => state.autosaveFrequencyMs / (1000 * 60),
 );
 
+export const selectSidebarCollapsed = createSelector(
+  [domain],
+  state => state.sidebarCollapsed,
+);
+
 export type SelectAutosaveType = ReturnType<typeof selectAutosave>;

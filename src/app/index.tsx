@@ -36,7 +36,10 @@ export function App({ persistor }: AppProps) {
       </Helmet>
       <ErrorHandler>
         <PersistGate loading={<span>Loading...</span>} persistor={persistor}>
-          <SnackbarProvider maxSnack={3}>
+          <SnackbarProvider
+            maxSnack={3}
+            anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+          >
             <SnackbarUtilsConfigurator />
             <Engine>
               <Routes>

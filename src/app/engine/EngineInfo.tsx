@@ -36,7 +36,16 @@ export function EngineInfo({ timings }: EngineInfoProps) {
   return (
     <TableContainer
       component={Paper}
-      sx={{ maxWidth: 400, my: 2, '& tr td:last-child': { minWidth: 200 } }}
+      sx={{
+        m: 1,
+        maxWidth: 400,
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        zIndex: 50_000,
+        border: '1px solid #ccc',
+        '& tr td:last-child': { minWidth: 200 },
+      }}
     >
       <Table>
         <TableBody>

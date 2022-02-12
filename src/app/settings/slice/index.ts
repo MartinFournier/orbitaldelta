@@ -3,6 +3,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 export const initialState = {
   autosaveEnabled: true,
   autosaveFrequencyMs: 1000 * 60 * 5,
+  sidebarCollapsed: false,
 };
 
 export type SettingsState = typeof initialState;
@@ -19,6 +20,9 @@ const slice = createSlice({
       state.autosaveEnabled = action.payload.autosaveEnabled;
       state.autosaveFrequencyMs =
         action.payload.autosaveFrequencyMinutes * (1000 * 60);
+    },
+    changeSidebarCollapsed(state, action: PayloadAction<boolean>) {
+      state.sidebarCollapsed = action.payload;
     },
   },
 });
