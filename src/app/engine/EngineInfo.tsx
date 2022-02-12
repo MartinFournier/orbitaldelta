@@ -1,6 +1,15 @@
 import React, { useMemo, useState, useEffect } from 'react';
 import throttle from 'lodash/throttle';
 import { Timings } from './useGameLoop';
+import {
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableRow,
+  Tooltip,
+} from '@mui/material';
 
 declare type EngineInfoProps = {
   timings: Timings;
@@ -25,17 +34,50 @@ export function EngineInfo({ timings }: EngineInfoProps) {
 
   if (!engineTimings) return <></>;
   return (
-    <>
-      <br />
-      Engine Load Time: {engineTimings.startedOn}
-      <br />
-      Current Frame Time: {engineTimings.currentFrameTime}
-      <br />
-      Previous Frame Time: {engineTimings.previousFrameTime}
-      <br />
-      FPS: {engineTimings.fps}
-      <br />
-      UPS: {engineTimings.ups}
-    </>
+    <TableContainer
+      component={Paper}
+      sx={{ maxWidth: 400, my: 2, '& tr td:last-child': { minWidth: 200 } }}
+    >
+      <Table>
+        <TableBody>
+          <TableRow>
+            <TableCell>
+              <Tooltip title="Frames per second">
+                <span>FPS</span>
+              </Tooltip>
+            </TableCell>
+            <TableCell>{engineTimings.fps.toFixed(2)}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>
+              <Tooltip title="Updates per second">
+                <span>UPS</span>
+              </Tooltip>
+            </TableCell>
+            <TableCell>{engineTimings.ups.toFixed(2)}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>Current Frame</TableCell>
+            <TableCell>{engineTimings.currentFrameTime.toFixed(2)}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>Previous Frame</TableCell>
+            <TableCell>{engineTimings.previousFrameTime.toFixed(2)}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>Delta</TableCell>
+            <TableCell>
+              {(
+                engineTimings.currentFrameTime - engineTimings.previousFrameTime
+              ).toFixed(2)}
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>Engine Started</TableCell>
+            <TableCell>{engineTimings.startedOn.toFixed(2)}</TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 }
