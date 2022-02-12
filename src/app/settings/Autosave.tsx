@@ -74,7 +74,7 @@ export default function AutosaveSlider() {
       />
       <AppCheckbox
         label="Enable Autosave"
-        value={autosaveEnabled}
+        checked={autosaveEnabled}
         onChange={handleChangeAutosave}
       />
     </Box>

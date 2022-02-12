@@ -18,7 +18,7 @@ export function ShowEngineStats() {
   return (
     <AppCheckbox
       label="Show Engine Stats"
-      value={showEngineStats}
+      checked={showEngineStats}
       onChange={onChange}
     />
   );
