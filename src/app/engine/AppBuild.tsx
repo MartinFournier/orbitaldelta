@@ -19,14 +19,22 @@ const detailedFormatter = new Intl.DateTimeFormat('en-GB', {
   hour12: false,
 });
 
-export function AppBuild() {
+export function AppBuild({ noLink = false }: { noLink?: boolean }) {
   const date = new Date(buildInfo.time);
   return (
     <>
       v{buildInfo.version} (
-      <Link href={`${baseUrl}/${buildInfo.commit}`} target="_blank">
-        {buildInfo.commit}
-      </Link>
+      {noLink ? (
+        buildInfo.commit
+      ) : (
+        <Link
+          href={`${baseUrl}/${buildInfo.commit}`}
+          target="_blank"
+          color="primary"
+        >
+          {buildInfo.commit}
+        </Link>
+      )}
       ){' '}
       <Tooltip title={<>Built On: {detailedFormatter.format(date)}</>}>
         <span>{shortFormatter.format(date)}</span>
