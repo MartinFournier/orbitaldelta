@@ -41,6 +41,15 @@ if (module.hot) {
   module.hot.accept(['./locales/i18n'], () => {
     // No need to render the App again because i18next works with the hooks
   });
+
+  // Write to the console to see when app was updated
+  module.hot.addStatusHandler(status => {
+    if (status === 'prepare') {
+      console.log('='.repeat(50));
+      console.log('Hot Reload > Refreshed');
+      console.log('='.repeat(50));
+    }
+  });
 }
 
 // If you want to start measuring performance in your app, pass a function
