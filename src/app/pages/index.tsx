@@ -9,7 +9,7 @@ export declare type AppPage = {
   title: string;
   category?: AppPageCategoryKey;
   description?: string;
-  route?: string;
+  route: string;
   icon?: React.ReactNode;
 };
 
