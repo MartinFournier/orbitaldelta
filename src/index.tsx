@@ -19,18 +19,19 @@ import { App } from 'app';
 import { HelmetProvider } from 'react-helmet-async';
 import { store, persistor } from 'store';
 import reportWebVitals from 'utilities/reportWebVitals';
+import { configureHotkeys } from 'app/hotkeys';
 
 // Initialize languages
 import './locales/i18n';
+
+configureHotkeys();
 
 const MOUNT_NODE = document.getElementById('root') as HTMLElement;
 
 ReactDOM.render(
   <Provider store={store}>
     <HelmetProvider>
-      <React.StrictMode>
-        <App persistor={persistor} />
-      </React.StrictMode>
+      <App persistor={persistor} />
     </HelmetProvider>
   </Provider>,
   MOUNT_NODE,

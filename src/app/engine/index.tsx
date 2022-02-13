@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 import useGameLoop from './useGameLoop';
 import { playerActions } from '../player/slice';
 import { EngineInfo } from './EngineInfo';
-import log from 'utilities/logger';
 import { useAppSelector } from 'store/hooks';
 import { selectShowEngineStats } from './slice/selectors';
 
@@ -17,7 +16,7 @@ export function Engine({ children }: EngineProps) {
   const showEngineStats = useAppSelector(selectShowEngineStats);
   const handleProcessing = useMemo(() => {
     const handler = (deltaMs: number) => {
-      log.debug(`Engine Processing -> Delta: ${deltaMs.toFixed(2)}ms.`);
+      console.debug(`Engine Processing -> Delta: ${deltaMs.toFixed(2)}ms.`);
       dispatch(playerActions.incrementProcessingDeltaMs(deltaMs));
     };
     return handler;
