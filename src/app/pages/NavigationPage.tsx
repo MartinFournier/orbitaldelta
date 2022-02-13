@@ -7,6 +7,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { pagesByCategory, AppPage, AppPageCategory } from '.';
 import NavigationDrawer from './NavigationDrawer';
+import { Tooltip } from '@mui/material';
 
 declare type NavigationPageProps = {
   children: React.ReactNode;
@@ -48,9 +49,15 @@ function PageEntry({
         isActive ? 'active' : ''
       }
     >
-      <ListItemButton selected={match !== null}>
-        <PageEntryInner pageItem={pageItem} />
-      </ListItemButton>
+      <Tooltip
+        title={pageItem.description ?? pageItem.title}
+        placement="right"
+        arrow
+      >
+        <ListItemButton selected={match !== null}>
+          <PageEntryInner pageItem={pageItem} />
+        </ListItemButton>
+      </Tooltip>
     </NavLink>
   );
 }
