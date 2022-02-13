@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Box } from '@mui/material';
-import { Page } from 'app/common/Page';
+import { Page, AppPageProps } from '../Page';
 import { Settings } from 'app/settings/Settings';
 
-export function SettingsPage() {
+export function SettingsPage(props: AppPageProps) {
   return (
-    <Page title="Settings">
+    <Page {...props}>
       <Box>
         <Settings />
       </Box>

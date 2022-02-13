@@ -1,6 +1,6 @@
 import { lazyLoad } from 'app/common/loadable';
 
-export const SettingsPage = lazyLoad(
+export const AboutPage = lazyLoad(
   () => import('./index'),
-  module => module.SettingsPage,
+  module => module.AboutPage,
 );

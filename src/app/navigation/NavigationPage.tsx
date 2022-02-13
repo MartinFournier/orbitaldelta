@@ -43,7 +43,7 @@ function PageEntry({
     <NavLink
       to={pageItem.route ?? '/'}
       key={`nav-${pageKey}`}
-      style={{ textDecoration: 'none' }}
+      style={{ textDecoration: 'none', color: 'inherit' }}
       className={({ isActive }: { isActive: boolean }) =>
         isActive ? 'active' : ''
       }

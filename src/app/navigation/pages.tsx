@@ -41,11 +41,13 @@ const pages: { [key: string]: AppPage } = {
   },
   about: {
     title: 'About',
+    route: '/about',
     category: 'misc',
     icon: <InfoIcon />,
   },
   notFound: {
-    title: 'Not Found',
+    title: '404: Page Not Found',
+    description: 'Page not found',
   },
 };
 

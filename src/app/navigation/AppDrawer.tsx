@@ -92,7 +92,7 @@ export default function AppDrawer({ children, pageContent }: AppDrawerProps) {
         {children}
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, minHeight: '100vh' }}>
-        <Box sx={{ p: 2 }}>{pageContent}</Box>
+        <Box sx={{ p: 2, height: '100%' }}>{pageContent}</Box>
       </Box>
     </Box>
   );

@@ -1,15 +1,11 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { P } from './P';
-import { Helmet } from 'react-helmet-async';
+import { AppPageProps, Page } from '../Page';
 
-export function NotFoundPage() {
+export function NotFoundPage(props: AppPageProps) {
   return (
-    <>
-      <Helmet>
-        <title>404 Page Not Found</title>
-        <meta name="description" content="Page not found" />
-      </Helmet>
+    <Page basic {...props}>
       <Wrapper>
         <Title>
           4
@@ -20,12 +16,12 @@ export function NotFoundPage() {
         </Title>
         <P>Page not found.</P>
       </Wrapper>
-    </>
+    </Page>
   );
 }
 
 const Wrapper = styled.div`
-  height: 100vh;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;

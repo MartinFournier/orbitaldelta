@@ -5,16 +5,19 @@ import { SnackbarProvider } from 'notistack';
 
 import { GlobalStyle } from 'styles/global-styles';
 
-import { HomePage } from './pages/HomePage/Loadable';
-import { NotFoundPage } from './pages/NotFoundPage/Loadable';
+import { HomePage } from './pages/HomePage';
+import { NotFoundPage } from './pages/NotFoundPage';
+import { AboutPage } from './pages/AboutPage';
+import { SettingsPage } from './pages/SettingsPage';
 import { useTranslation } from 'react-i18next';
 import { ErrorHandler } from './error-handler';
 import { Engine } from './engine';
 
 import { PersistGate } from 'redux-persist/integration/react';
 import { Persistor } from 'redux-persist';
-import { SettingsPage } from './pages/SettingsPage';
+
 import { SnackbarUtilsConfigurator } from './common/Toasts';
+import pages from './navigation/pages';
 
 interface AppProps {
   persistor: Persistor;
@@ -44,11 +47,23 @@ export function App({ persistor }: AppProps) {
             <Engine>
               <Routes>
                 <Route
-                  path="/"
-                  element={<HomePage saveFn={persistor.flush} />}
+                  path={pages.main.route}
+                  element={
+                    <HomePage saveFn={persistor.flush} {...pages.main} />
+                  }
                 />
-                <Route path="/settings" element={<SettingsPage />} />
-                <Route element={<NotFoundPage />} />
+                <Route
+                  path={pages.settings.route}
+                  element={<SettingsPage {...pages.settings} />}
+                />
+                <Route
+                  path={pages.about.route}
+                  element={<AboutPage {...pages.about} />}
+                />
+                <Route
+                  path="*"
+                  element={<NotFoundPage {...pages.notFound} />}
+                />
               </Routes>
             </Engine>
           </SnackbarProvider>
