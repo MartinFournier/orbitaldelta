@@ -15,6 +15,7 @@ import { AppBuild } from 'app/engine/AppBuild';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { selectSidebarCollapsed } from 'app/settings/slice/selectors';
 import { settingsActions } from 'app/settings/slice';
+import PageContainer from './PageContainer';
 
 declare type AppDrawerProps = {
   children: React.ReactNode;
@@ -59,7 +60,10 @@ const Drawer = styled(MuiDrawer)(({ theme, open }) => ({
   }),
 }));
 
-export default function AppDrawer({ children, pageContent }: AppDrawerProps) {
+export default function NavigationDrawer({
+  children,
+  pageContent,
+}: AppDrawerProps) {
   const dispatch = useAppDispatch();
   const sidebarCollapsed = useAppSelector(selectSidebarCollapsed);
   const [collapsed, setCollapsed] = React.useState(sidebarCollapsed);
@@ -91,9 +95,7 @@ export default function AppDrawer({ children, pageContent }: AppDrawerProps) {
         <Divider />
         {children}
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, minHeight: '100vh' }}>
-        <Box sx={{ p: 2, height: '100%' }}>{pageContent}</Box>
-      </Box>
+      <PageContainer>{pageContent}</PageContainer>
     </Box>
   );
 }

@@ -5,8 +5,8 @@ import Divider from '@mui/material/Divider';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { pagesByCategory, AppPage, AppPageCategory } from './pages';
-import AppDrawer from './AppDrawer';
+import { pagesByCategory, AppPage, AppPageCategory } from '.';
+import NavigationDrawer from './NavigationDrawer';
 
 declare type NavigationPageProps = {
   children: React.ReactNode;
@@ -92,5 +92,7 @@ export default function NavigationPage({ children }: NavigationPageProps) {
       [] as JSX.Element[],
     );
 
-  return <AppDrawer pageContent={children}>{MenuItems}</AppDrawer>;
+  return (
+    <NavigationDrawer pageContent={children}>{MenuItems}</NavigationDrawer>
+  );
 }

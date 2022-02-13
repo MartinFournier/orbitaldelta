@@ -3,12 +3,6 @@ import { Helmet } from 'react-helmet-async';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import { SnackbarProvider } from 'notistack';
 
-import { GlobalStyle } from 'styles/global-styles';
-
-import { HomePage } from './pages/HomePage';
-import { NotFoundPage } from './pages/NotFoundPage';
-import { AboutPage } from './pages/AboutPage';
-import { SettingsPage } from './pages/SettingsPage';
 import { useTranslation } from 'react-i18next';
 import { ErrorHandler } from './error-handler';
 import { Engine } from './engine';
@@ -17,7 +11,15 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { Persistor } from 'redux-persist';
 
 import { SnackbarUtilsConfigurator } from './common/Toasts';
-import pages from './navigation/pages';
+
+import { GlobalStyle } from 'styles/global-styles';
+
+import pages from './pages';
+import { HomePage } from './pages/HomePage';
+import { NotFoundPage } from './pages/NotFoundPage';
+import { AboutPage } from './pages/AboutPage';
+import { SettingsPage } from './pages/SettingsPage';
+import { LoadingPage } from './pages/LoadingPage';
 
 interface AppProps {
   persistor: Persistor;
@@ -38,7 +40,10 @@ export function App({ persistor }: AppProps) {
         />
       </Helmet>
       <ErrorHandler>
-        <PersistGate loading={<span>Loading...</span>} persistor={persistor}>
+        <PersistGate
+          loading={<LoadingPage {...pages.loading} />}
+          persistor={persistor}
+        >
           <SnackbarProvider
             maxSnack={3}
             anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
@@ -59,6 +64,10 @@ export function App({ persistor }: AppProps) {
                 <Route
                   path={pages.about.route}
                   element={<AboutPage {...pages.about} />}
+                />
+                <Route
+                  path={pages.loading.route}
+                  element={<LoadingPage {...pages.loading} />}
                 />
                 <Route
                   path="*"

@@ -45,6 +45,10 @@ const pages: { [key: string]: AppPage } = {
     category: 'misc',
     icon: <InfoIcon />,
   },
+  loading: {
+    title: 'Loading',
+    route: '/loading',
+  },
   notFound: {
     title: '404: Page Not Found',
     description: 'Page not found',
