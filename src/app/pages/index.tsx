@@ -1,9 +1,11 @@
 import React from 'react';
 
 import PublicIcon from '@mui/icons-material/Public';
+import AssessmentOutlinedIcon from '@mui/icons-material/AssessmentOutlined';
 import SettingsIcon from '@mui/icons-material/Settings';
 import InfoIcon from '@mui/icons-material/Info';
 import LogoDevIcon from '@mui/icons-material/LogoDev';
+import LocationCityIcon from '@mui/icons-material/LocationCity';
 
 export declare type AppPage = {
   title: string;
@@ -34,6 +36,18 @@ const pages: { [key: string]: AppPage } = {
   main: {
     title: 'Main',
     route: '/',
+    category: 'main',
+    icon: <AssessmentOutlinedIcon />,
+  },
+  groundControl: {
+    title: 'Ground Control',
+    route: '/ground-control',
+    category: 'main',
+    icon: <LocationCityIcon />,
+  },
+  orbital: {
+    title: 'Orbital View',
+    route: '/orbital',
     category: 'main',
     icon: <PublicIcon />,
   },

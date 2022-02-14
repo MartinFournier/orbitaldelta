@@ -17,6 +17,7 @@ import { AboutPage } from './pages/AboutPage';
 import { SettingsPage } from './pages/SettingsPage';
 import { LoadingPage } from './pages/LoadingPage';
 import { GlobalHotkeys } from './hotkeys';
+import { GroundControlPage } from './pages/GroundControlPage';
 
 interface AppProps {
   persistor: Persistor;
@@ -54,6 +55,10 @@ export function App({ persistor }: AppProps) {
                     element={
                       <HomePage saveFn={persistor.flush} {...pages.main} />
                     }
+                  />
+                  <Route
+                    path={pages.groundControl.route}
+                    element={<GroundControlPage {...pages.groundControl} />}
                   />
                   <Route
                     path={pages.settings.route}
