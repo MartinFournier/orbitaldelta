@@ -7,7 +7,9 @@ module.exports = {
     'stylelint-config-prettier',
     'stylelint-config-styled-components',
   ],
-  rules: {},
+  rules: {
+    'scss/operator-no-unspaced': null,
+  },
 
   overrides: [
     {

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
-import { SnackbarProvider } from 'notistack';
 import { useTranslation } from 'react-i18next';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Persistor } from 'redux-persist';
@@ -18,9 +17,12 @@ import { SettingsPage } from './pages/SettingsPage';
 import { LoadingPage } from './pages/LoadingPage';
 import { GlobalHotkeys } from './hotkeys';
 import { GroundControlPage } from './pages/GroundControlPage';
+import { DevPage } from './pages/DevPage';
+
 import buildInfo from 'utilities/buildInfo';
 import { ThemeProvider } from '@mui/system';
 import theme from 'styles/theme';
+import { StyledSnackbarProvider } from './common/StyledSnackbarProvider';
 
 interface AppProps {
   persistor: Persistor;
@@ -45,6 +47,7 @@ function AppRoutes({ persistor }: AppProps) {
         path={pages.about.route}
         element={<AboutPage {...pages.about} />}
       />
+      <Route path={pages.dev.route} element={<DevPage {...pages.dev} />} />
       <Route
         path={pages.loading.route}
         element={<LoadingPage {...pages.loading} />}
@@ -77,15 +80,12 @@ export function App(props: AppProps) {
             persistor={props.persistor}
           >
             <GlobalHotkeys>
-              <SnackbarProvider
-                maxSnack={3}
-                anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-              >
+              <StyledSnackbarProvider>
                 <SnackbarUtilsConfigurator />
                 <Engine>
                   <AppRoutes {...props} />
                 </Engine>
-              </SnackbarProvider>
+              </StyledSnackbarProvider>
             </GlobalHotkeys>
           </PersistGate>
         </ErrorHandler>

@@ -63,6 +63,13 @@ const pages: { [key: string]: AppPage } = {
     category: 'misc',
     icon: <InfoIcon />,
   },
+  dev: {
+    title: 'Dev',
+    description: 'Dev Tools',
+    route: '/dev',
+    category: 'dev',
+    icon: <LogoDevIcon />,
+  },
   loading: {
     title: 'Loading',
     route: '/loading',

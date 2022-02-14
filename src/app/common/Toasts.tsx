@@ -3,6 +3,7 @@
  */
 
 import { Button } from '@mui/material';
+import { styled } from '@mui/system';
 import {
   OptionsObject,
   SnackbarKey,
@@ -18,20 +19,22 @@ export const SnackbarUtilsConfigurator: React.FC = () => {
   return null;
 };
 
-const defaultAction = (options: OptionsObject) => (key: SnackbarKey) => {
-  let color: 'primary' | 'secondary' = 'primary';
-  if (['success', 'info'].includes(options?.variant ?? '')) color = 'secondary';
-  return (
-    <Button
-      color={color}
+const StyledButton = styled(Button)`
+  & {
+    color: ${props => props.theme.palette.background.default};
+  }
+`;
+
+const defaultAction = (options: OptionsObject) => (key: SnackbarKey) =>
+  (
+    <StyledButton
       onClick={() => {
         toastActions.close(key);
       }}
     >
       Dismiss
-    </Button>
+    </StyledButton>
   );
-};
 
 export const toastActions = {
   success(msg: SnackbarMessage, options: OptionsObject = {}) {

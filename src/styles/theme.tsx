@@ -14,6 +14,22 @@ declare module '@mui/material/styles' {
   }
 }
 
+const colors = {
+  primary: '#c0c0de',
+  secondary: '#DA4167',
+
+  background: '#18112D',
+  well: '#252240',
+
+  textPrimary: '#efe9ec',
+  textSecondary: '#c2e0ff',
+
+  success: '#21D9A3',
+  warning: '#D9A20B',
+  info: '#16A7D9',
+  error: '#D92B57',
+};
+
 // https://coolors.co/18112d-252240-c0c0de-c2e0ff-efe9ec-f1b4de-da4167-d92b57-21d9a3-16a7d9
 // https://bareynol.github.io/mui-theme-creator
 const theme = createTheme({
@@ -24,30 +40,30 @@ const theme = createTheme({
   palette: {
     mode: 'dark',
     primary: {
-      main: '#c0c0de',
+      main: colors.primary,
     },
     secondary: {
-      main: '#DA4167',
+      main: colors.secondary,
     },
     background: {
-      default: '#18112D',
-      paper: '#252240',
-    },
-    success: {
-      main: '#21D9A3',
+      default: colors.background,
+      paper: colors.well,
     },
     text: {
-      primary: '#efe9ec',
-      secondary: '#c2e0ff',
+      primary: colors.textPrimary,
+      secondary: colors.textSecondary,
+    },
+    success: {
+      main: colors.success,
     },
     warning: {
-      main: '#D9A20B',
+      main: colors.warning,
     },
     info: {
-      main: '#16A7D9',
+      main: colors.info,
     },
     error: {
-      main: '#D92B57',
+      main: colors.error,
     },
   },
 
