@@ -84,7 +84,7 @@ export default function NavigationDrawer({
               leaveDelay={500}
               arrow
             >
-              <ListItemText primary="Orbital Delta" />
+              <ListItemText primary="Orbital Δ" />
             </Tooltip>
           </ListItem>
         </List>

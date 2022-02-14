@@ -18,18 +18,51 @@ import { SettingsPage } from './pages/SettingsPage';
 import { LoadingPage } from './pages/LoadingPage';
 import { GlobalHotkeys } from './hotkeys';
 import { GroundControlPage } from './pages/GroundControlPage';
+import buildInfo from 'utilities/buildInfo';
+import { ThemeProvider } from '@mui/system';
+import theme from 'styles/theme';
 
 interface AppProps {
   persistor: Persistor;
 }
 
-export function App({ persistor }: AppProps) {
+function AppRoutes({ persistor }: AppProps) {
+  return (
+    <Routes>
+      <Route
+        path={pages.main.route}
+        element={<HomePage saveFn={persistor.flush} {...pages.main} />}
+      />
+      <Route
+        path={pages.groundControl.route}
+        element={<GroundControlPage {...pages.groundControl} />}
+      />
+      <Route
+        path={pages.settings.route}
+        element={<SettingsPage {...pages.settings} />}
+      />
+      <Route
+        path={pages.about.route}
+        element={<AboutPage {...pages.about} />}
+      />
+      <Route
+        path={pages.loading.route}
+        element={<LoadingPage {...pages.loading} />}
+      />
+      <Route path="*" element={<NotFoundPage {...pages.notFound} />} />
+    </Routes>
+  );
+}
+
+export function App(props: AppProps) {
   const { i18n } = useTranslation();
+  let template = `%s - Orbital Δ - v${buildInfo.version} (${buildInfo.commit})`;
+  if (process.env.NODE_ENV !== 'production') template = `[dev] ${template}`;
   return (
     <BrowserRouter>
       <Helmet
-        titleTemplate="%s - Orbital Target"
-        defaultTitle="Orbital Target"
+        titleTemplate={template}
+        defaultTitle="Orbital Δ"
         htmlAttributes={{ lang: i18n.language }}
       >
         <meta
@@ -37,52 +70,27 @@ export function App({ persistor }: AppProps) {
           content="An incremental based on automated rocketry."
         />
       </Helmet>
-      <ErrorHandler>
-        <PersistGate
-          loading={<LoadingPage {...pages.loading} />}
-          persistor={persistor}
-        >
-          <GlobalHotkeys>
-            <SnackbarProvider
-              maxSnack={3}
-              anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-            >
-              <SnackbarUtilsConfigurator />
-              <Engine>
-                <Routes>
-                  <Route
-                    path={pages.main.route}
-                    element={
-                      <HomePage saveFn={persistor.flush} {...pages.main} />
-                    }
-                  />
-                  <Route
-                    path={pages.groundControl.route}
-                    element={<GroundControlPage {...pages.groundControl} />}
-                  />
-                  <Route
-                    path={pages.settings.route}
-                    element={<SettingsPage {...pages.settings} />}
-                  />
-                  <Route
-                    path={pages.about.route}
-                    element={<AboutPage {...pages.about} />}
-                  />
-                  <Route
-                    path={pages.loading.route}
-                    element={<LoadingPage {...pages.loading} />}
-                  />
-                  <Route
-                    path="*"
-                    element={<NotFoundPage {...pages.notFound} />}
-                  />
-                </Routes>
-              </Engine>
-            </SnackbarProvider>
-          </GlobalHotkeys>
-        </PersistGate>
-      </ErrorHandler>
-      <GlobalStyle />
+      <ThemeProvider theme={theme}>
+        <ErrorHandler>
+          <PersistGate
+            loading={<LoadingPage {...pages.loading} />}
+            persistor={props.persistor}
+          >
+            <GlobalHotkeys>
+              <SnackbarProvider
+                maxSnack={3}
+                anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+              >
+                <SnackbarUtilsConfigurator />
+                <Engine>
+                  <AppRoutes {...props} />
+                </Engine>
+              </SnackbarProvider>
+            </GlobalHotkeys>
+          </PersistGate>
+        </ErrorHandler>
+        <GlobalStyle />
+      </ThemeProvider>
     </BrowserRouter>
   );
 }
