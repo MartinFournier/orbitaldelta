@@ -15,7 +15,6 @@ import { AppBuild } from 'app/engine/AppBuild';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { selectSidebarCollapsed } from 'app/settings/slice/selectors';
 import { settingsActions } from 'app/settings/slice';
-import PageContainer from './PageContainer';
 
 declare type AppDrawerProps = {
   children: React.ReactNode;
@@ -92,7 +91,7 @@ export default function NavigationDrawer({
         <Divider />
         {children}
       </Drawer>
-      <PageContainer>{pageContent}</PageContainer>
+      {pageContent}
     </Box>
   );
 }

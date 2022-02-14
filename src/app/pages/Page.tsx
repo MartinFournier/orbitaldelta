@@ -10,6 +10,8 @@ export interface PageProps extends AppPage {
   children: React.ReactNode;
   basic?: boolean;
   noSidebar?: boolean;
+  showTitle?: boolean;
+  noPadding?: boolean;
 }
 
 export declare type AppPageProps = Omit<PageProps, 'children'>;
@@ -19,11 +21,13 @@ function InnerPage(props: PageProps) {
     <>{props.children}</>
   ) : (
     <>
-      <Typography variant="h4" sx={{ mb: 2 }}>
-        {props.title}
-      </Typography>
+      {props.showTitle && (
+        <Typography variant="h4" sx={{ mb: 2 }}>
+          {props.title}
+        </Typography>
+      )}
       {props.children}
-      <Box sx={{ mt: 2, fontSize: '0.8em' }}>
+      <Box sx={{ mt: 2, fontSize: '0.8em', textAlign: 'center' }}>
         <AppBuild />
       </Box>
     </>
@@ -38,10 +42,14 @@ export function Page(props: PageProps) {
         <meta name="description" content={props.description ?? props.title} />
       </Helmet>
       {props.noSidebar ? (
-        <PageContainer>{props.children}</PageContainer>
+        <PageContainer noPadding={props.noPadding}>
+          {props.children}
+        </PageContainer>
       ) : (
         <NavigationPage>
-          <InnerPage {...props} />
+          <PageContainer noPadding={props.noPadding}>
+            <InnerPage {...props} />
+          </PageContainer>
         </NavigationPage>
       )}
     </>

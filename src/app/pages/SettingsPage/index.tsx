@@ -5,7 +5,7 @@ import { Settings } from 'app/settings/Settings';
 
 export function SettingsPage(props: AppPageProps) {
   return (
-    <Page {...props}>
+    <Page {...props} noPadding>
       <Box>
         <Settings />
       </Box>
