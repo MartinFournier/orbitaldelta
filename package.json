@@ -27,6 +27,9 @@
     "*.{md,json}": [
       "prettier --write"
     ],
+    "*.{css,scss,jsx,js,tsx,ts}": [
+      "stylelint --fix"
+    ],
     "*.{ts,tsx,js,jsx}": [
       "eslint --fix"
     ]
