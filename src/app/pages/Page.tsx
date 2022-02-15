@@ -5,7 +5,7 @@ import { AppBuild } from 'app/engine/AppBuild';
 import NavigationPage from './NavigationPage';
 import { AppPage } from '.';
 import PageContainer from './PageContainer';
-import { styled, Theme } from '@mui/system';
+import styled from 'styled-components';
 
 export interface PageProps extends AppPage {
   children: React.ReactNode;
@@ -15,27 +15,25 @@ export interface PageProps extends AppPage {
   noPadding?: boolean;
 }
 
-const AppFooter = styled(Box)(({ theme }: { theme: Theme }) => ({
-  marginTop: theme.spacing(2),
-  padding: theme.spacing(1),
-  fontSize: '0.8em',
-  textAlign: 'center',
-  backgroundColor: theme.palette.secondary.main,
-  borderTop: `1px solid ${theme.palette.secondary.dark}`,
-}));
+const AppFooter = styled(Box)`
+  margin-top: ${props => props.theme.spacing(2)};
+  padding: ${props => props.theme.spacing(1)};
+  font-size: 0.8em;
+  text-align: center;
+  background-color: ${props => props.theme.palette.secondary.main};
+  border-top: 1px solid ${props => props.theme.palette.secondary.dark};
+`;
 
-const OuterWrapper = styled(Box)({
-  display: 'flex',
-  flexDirection: 'column',
-  height: '100%',
-});
+const OuterWrapper = styled(Box)`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+`;
 
-const InnerWrapper = styled(Box)(
-  ({ theme, padded = true }: { padded?: boolean; theme: Theme }) => ({
-    flex: 1,
-    padding: padded ? theme.spacing(2) : 0,
-  }),
-);
+const InnerWrapper = styled(Box)<{ padded: boolean }>`
+  flex: 1;
+  padding: ${props => (props.padded ? props.theme.spacing(2) : 0)};
+`;
 
 export declare type AppPageProps = Omit<PageProps, 'children'>;
 

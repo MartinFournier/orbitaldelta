@@ -1,5 +1,5 @@
 import { Box, LinearProgress } from '@mui/material';
-import { styled } from '@mui/system';
+import styled from 'styled-components';
 import * as React from 'react';
 import { AppPageProps } from '../Page';
 import PageSplash from '../PageSplash';

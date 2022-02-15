@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { styled } from '@mui/system';
+import styled from 'styled-components';
 import { AppPageProps, Page } from './Page';
 
 interface PageSplashProps extends AppPageProps {

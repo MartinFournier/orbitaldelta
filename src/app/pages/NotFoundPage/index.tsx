@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { styled } from '@mui/system';
+import styled from 'styled-components';
 import { AppPageProps } from '../Page';
 import PageSplash from '../PageSplash';
 
@@ -20,8 +20,8 @@ export function NotFoundPage(props: AppPageProps) {
   );
 }
 
-const P = styled('p')({
-  fontSize: '1rem',
-  lineHeight: '1.5',
-  margin: '0.625rem 0 1.5rem 0',
-});
+const P = styled('p')`
+  font-size: 1rem;
+  line-height: 1.5;
+  margin: 0.625rem 0 1.5rem 0;
+`;

@@ -3,7 +3,7 @@
 exports[`<App /> should render and match the snapshot 1`] = `
 <BrowserRouter>
   <Helmet
-    defaultTitle="Orbital Target"
+    defaultTitle="Orbital Δ"
     defer={true}
     encodeSpecialCharacters={true}
     htmlAttributes={
@@ -12,55 +12,62 @@ exports[`<App /> should render and match the snapshot 1`] = `
       }
     }
     prioritizeSeoTags={false}
-    titleTemplate="%s - Orbital Target"
+    titleTemplate="[dev] %s - Orbital Δ - vundefined (undefined)"
   >
     <meta
       content="An incremental based on automated rocketry."
       name="description"
     />
   </Helmet>
-  <ErrorHandler>
-    <PersistGate
-      loading={
-        <span>
-          Loading...
-        </span>
-      }
-      persistor={
-        Object {
-          "dispatch": [Function],
-          "flush": [Function],
-          "getState": [Function],
-          "pause": [Function],
-          "persist": [Function],
-          "purge": [Function],
-          "replaceReducer": [Function],
-          "subscribe": [Function],
-          Symbol(Symbol.observable): [Function],
+  <AppThemeProvider>
+    <ErrorHandler>
+      <PersistGate
+        loading={
+          <LoadingPage
+            category="dev"
+            icon={<Memo />}
+            route="/loading"
+            title="Loading"
+          />
         }
-      }
-    >
-      <Engine>
-        <Routes>
-          <Route
-            element={
-              <Unknown
-                saveFn={[Function]}
+        persistor={
+          Object {
+            "dispatch": [Function],
+            "flush": [Function],
+            "getState": [Function],
+            "pause": [Function],
+            "persist": [Function],
+            "purge": [Function],
+            "replaceReducer": [Function],
+            "subscribe": [Function],
+            Symbol(Symbol.observable): [Function],
+          }
+        }
+      >
+        <GlobalHotkeys>
+          <StyledSnackbarProvider>
+            <SnackbarUtilsConfigurator />
+            <Engine>
+              <AppRoutes
+                persistor={
+                  Object {
+                    "dispatch": [Function],
+                    "flush": [Function],
+                    "getState": [Function],
+                    "pause": [Function],
+                    "persist": [Function],
+                    "purge": [Function],
+                    "replaceReducer": [Function],
+                    "subscribe": [Function],
+                    Symbol(Symbol.observable): [Function],
+                  }
+                }
               />
-            }
-            path="/"
-          />
-          <Route
-            element={<SettingsPage />}
-            path="/settings"
-          />
-          <Route
-            element={<Unknown />}
-          />
-        </Routes>
-      </Engine>
-    </PersistGate>
-  </ErrorHandler>
-  <Memo(l) />
+            </Engine>
+          </StyledSnackbarProvider>
+        </GlobalHotkeys>
+      </PersistGate>
+    </ErrorHandler>
+  </AppThemeProvider>
 </BrowserRouter>
 `;

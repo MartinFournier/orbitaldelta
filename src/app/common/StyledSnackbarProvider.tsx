@@ -1,6 +1,6 @@
 import React from 'react';
 import { SnackbarProvider } from 'notistack';
-import { styled } from '@mui/material';
+import styled from 'styled-components';
 
 const Snackbar = styled(SnackbarProvider)`
   &.SnackbarItem-variantSuccess {
