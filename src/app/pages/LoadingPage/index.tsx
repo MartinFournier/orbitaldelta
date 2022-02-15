@@ -19,5 +19,6 @@ export function LoadingPage(props: AppPageProps) {
 }
 
 const Title = styled(Typography)`
-  color: ${props => props.theme.palette.primary.main};
+  color: ${props => props.theme.palette.primary.light};
+  font-weight: 700;
 `;

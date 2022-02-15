@@ -5,13 +5,17 @@ import { AppPageProps } from '../Page';
 import PageSplash from '../PageSplash';
 
 export function NotFoundPage(props: AppPageProps) {
-  const splashTitle = <Typography variant="h1">404</Typography>;
+  const splashTitle = <Title variant="h1">404</Title>;
   return (
     <PageSplash {...props} splashTitle={splashTitle}>
       <P variant="subtitle1">Page not found.</P>
     </PageSplash>
   );
 }
+
+const Title = styled(Typography)`
+  font-weight: 700;
+`;
 
 const P = styled(Typography)`
   font-size: 1rem;
