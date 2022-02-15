@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Persistor } from 'redux-persist';
 import { SnackbarUtilsConfigurator } from './common/Toasts';
-import { GlobalStyle } from 'styles/global-styles';
 import { Engine } from './engine';
 import { ErrorHandler } from './error-handler';
 
@@ -20,9 +19,8 @@ import { GroundControlPage } from './pages/GroundControlPage';
 import { DevPage } from './pages/DevPage';
 
 import buildInfo from 'utilities/buildInfo';
-import { ThemeProvider } from '@mui/system';
-import theme from 'styles/theme';
 import { StyledSnackbarProvider } from './common/StyledSnackbarProvider';
+import AppThemeProvider from 'styles/provider';
 
 interface AppProps {
   persistor: Persistor;
@@ -73,7 +71,7 @@ export function App(props: AppProps) {
           content="An incremental based on automated rocketry."
         />
       </Helmet>
-      <ThemeProvider theme={theme}>
+      <AppThemeProvider>
         <ErrorHandler>
           <PersistGate
             loading={<LoadingPage {...pages.loading} />}
@@ -89,8 +87,7 @@ export function App(props: AppProps) {
             </GlobalHotkeys>
           </PersistGate>
         </ErrorHandler>
-        <GlobalStyle />
-      </ThemeProvider>
+      </AppThemeProvider>
     </BrowserRouter>
   );
 }

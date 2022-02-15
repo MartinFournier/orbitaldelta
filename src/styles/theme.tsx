@@ -14,7 +14,7 @@ declare module '@mui/material/styles' {
   }
 }
 
-const colors = {
+export const colors = {
   primary: '#c0c0de',
   secondary: '#DA4167',
 

@@ -3,7 +3,6 @@ import Box from '@mui/material/Box';
 import { styled, Theme } from '@mui/material/styles';
 import MuiDrawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
-import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
@@ -71,7 +70,6 @@ export default function NavigationDrawer({
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
       <Drawer variant="permanent" open={!collapsed}>
         <List>
           <ListItem button onClick={handleToggle} key="header">
