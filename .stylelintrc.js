@@ -9,6 +9,7 @@ module.exports = {
   ],
   rules: {
     'scss/operator-no-unspaced': null,
+    'scss/operator-no-newline-after': null,
   },
 
   overrides: [
