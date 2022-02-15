@@ -1,4 +1,4 @@
-import { Box, LinearProgress } from '@mui/material';
+import { Box, LinearProgress, Typography } from '@mui/material';
 import styled from 'styled-components';
 import * as React from 'react';
 import { AppPageProps } from '../Page';
@@ -6,7 +6,11 @@ import PageSplash from '../PageSplash';
 
 export function LoadingPage(props: AppPageProps) {
   return (
-    <PageSplash noSidebar splashTitle={<Title>Loading</Title>} {...props}>
+    <PageSplash
+      noSidebar
+      splashTitle={<Title variant="h1">Loading</Title>}
+      {...props}
+    >
       <Box sx={{ width: '400px', mt: 2 }}>
         <LinearProgress color="secondary" />
       </Box>
@@ -14,6 +18,6 @@ export function LoadingPage(props: AppPageProps) {
   );
 }
 
-const Title = styled('h3')`
+const Title = styled(Typography)`
   color: ${props => props.theme.palette.primary.main};
 `;

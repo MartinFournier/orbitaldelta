@@ -1,26 +1,19 @@
+import { Typography } from '@mui/material';
 import * as React from 'react';
 import styled from 'styled-components';
 import { AppPageProps } from '../Page';
 import PageSplash from '../PageSplash';
 
 export function NotFoundPage(props: AppPageProps) {
-  const splashTitle = (
-    <>
-      4
-      <span role="img" aria-label="Crying Face">
-        😢
-      </span>
-      4
-    </>
-  );
+  const splashTitle = <Typography variant="h1">404</Typography>;
   return (
     <PageSplash {...props} splashTitle={splashTitle}>
-      <P>Page not found.</P>
+      <P variant="subtitle1">Page not found.</P>
     </PageSplash>
   );
 }
 
-const P = styled('p')`
+const P = styled(Typography)`
   font-size: 1rem;
   line-height: 1.5;
   margin: 0.625rem 0 1.5rem 0;

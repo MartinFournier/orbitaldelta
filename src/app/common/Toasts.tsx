@@ -20,9 +20,7 @@ export const SnackbarUtilsConfigurator: React.FC = () => {
 };
 
 const StyledButton = styled(Button)`
-  & {
-    color: ${props => props.theme.palette.background.default};
-  }
+  color: ${props => props.theme.palette.primary.contrastText};
 `;
 
 const defaultAction = (options: OptionsObject) => (key: SnackbarKey) =>

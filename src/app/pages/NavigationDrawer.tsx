@@ -53,6 +53,9 @@ const Drawer = styled(MuiDrawer)(({ theme, open }) => ({
     ...closedMixin(theme),
     '& .MuiDrawer-paper': closedMixin(theme),
   }),
+  '& .MuiListItemButton-root.Mui-selected': {
+    borderRight: `4px solid ${theme.palette.secondary.main}`,
+  },
 }));
 
 export default function NavigationDrawer({
@@ -69,8 +72,8 @@ export default function NavigationDrawer({
   };
 
   return (
-    <Box sx={{ display: 'flex' }}>
-      <Drawer variant="permanent" open={!collapsed}>
+    <Box id="app-wrapper" sx={{ display: 'flex' }}>
+      <Drawer id="app-navigation-drawer" variant="permanent" open={!collapsed}>
         <List>
           <ListItem button onClick={handleToggle} key="header">
             <ListItemIcon>

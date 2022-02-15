@@ -1,25 +1,14 @@
 import { createTheme } from '@mui/material';
-
-declare module '@mui/material/styles' {
-  interface Theme {
-    status: {
-      danger: string;
-    };
-  }
-  // allow configuration using `createTheme`
-  interface ThemeOptions {
-    status?: {
-      danger?: string;
-    };
-  }
-}
+import fonts from './fonts';
 
 export const colors = {
   primary: '#c0c0de',
   secondary: '#DA4167',
 
   background: '#18112D',
-  well: '#252240',
+  backgroundLight: '#20163B',
+  backgroundDark: '#0F0C1D',
+  paper: '#252240',
 
   textPrimary: '#efe9ec',
   textSecondary: '#c2e0ff',
@@ -45,9 +34,14 @@ const theme = createTheme({
     secondary: {
       main: colors.secondary,
     },
+    bg: {
+      main: colors.background,
+      light: colors.backgroundLight,
+      dark: colors.backgroundDark,
+    },
     background: {
       default: colors.background,
-      paper: colors.well,
+      paper: colors.paper,
     },
     text: {
       primary: colors.textPrimary,
@@ -68,8 +62,41 @@ const theme = createTheme({
   },
 
   typography: {
-    fontFamily: "'Fira Code', 'Helvetica Neue', Helvetica, Arial, sans-serif",
+    fontFamily: fonts.main,
     fontSize: 12,
+
+    h1: {
+      fontFamily: fonts.title,
+    },
+    h2: {
+      fontFamily: fonts.title,
+    },
+    h3: {
+      fontFamily: fonts.title,
+    },
+    h4: {
+      fontFamily: fonts.title,
+    },
+    h5: {
+      fontFamily: fonts.title,
+    },
+    h6: {
+      fontFamily: fonts.title,
+    },
+    prose: {
+      fontFamily: fonts.prose,
+    },
+    code: {
+      fontFamily: fonts.monospace,
+    },
+  },
+
+  components: {
+    MuiButtonBase: {
+      defaultProps: {
+        // variant: 'outlined',
+      },
+    },
   },
 });
 

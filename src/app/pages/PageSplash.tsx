@@ -1,3 +1,4 @@
+import { Box } from '@mui/material';
 import * as React from 'react';
 import styled from 'styled-components';
 import { AppPageProps, Page } from './Page';
@@ -14,29 +15,32 @@ export default function PageSplash({
 }: PageSplashProps) {
   return (
     <Page basic {...pageProps}>
-      <Wrapper>
-        <Title>{splashTitle}</Title>
-        {children}
-      </Wrapper>
+      <SplashContainer id="app-splash-container">
+        <Title id="app-splash-title">{splashTitle}</Title>
+        <Box id="app-splash-content">{children}</Box>
+      </SplashContainer>
     </Page>
   );
 }
 
-const Wrapper = styled('div')({
-  height: '100%',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  flexDirection: 'column',
-  minHeight: '320px',
-});
+const SplashContainer = styled(Box)`
+  /* height: 100vh; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 320px;
+  flex: 1;
+  padding: ${props => props.theme.spacing(2)};
+`;
 
-const Title = styled('div')({
-  marginTop: '-8vh',
-  fontWeight: 'bold',
-  fontSize: '3.375rem',
+const Title = styled(Box)`
+  margin-top: -8vh;
+  margin-bottom: ${props => props.theme.spacing(2)};
+  font-weight: bold;
+  font-size: 3.375rem;
 
-  '& span': {
-    fontSize: '3.125rem',
-  },
-});
+  & span: {
+    font-size: 3.125rem;
+  }
+`;

@@ -25,6 +25,7 @@ export function SaveGameButton({ saveFn: flush }: ButtonProps) {
     <Tooltip title={<span>Saved on: {savedOn}</span>}>
       <span>
         <Button
+          variant="contained"
           disabled={isSaving}
           startIcon={<SaveIcon />}
           onClick={onButtonClick}

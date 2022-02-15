@@ -11,49 +11,70 @@ export interface PageProps extends AppPage {
   children: React.ReactNode;
   basic?: boolean;
   noSidebar?: boolean;
-  showTitle?: boolean;
   noPadding?: boolean;
 }
 
-const AppFooter = styled(Box)`
+const StyledFooter = styled(Box)`
   margin-top: ${props => props.theme.spacing(2)};
   padding: ${props => props.theme.spacing(1)};
   font-size: 0.8em;
   text-align: center;
-  background-color: ${props => props.theme.palette.secondary.main};
-  border-top: 1px solid ${props => props.theme.palette.secondary.dark};
+  background-color: ${props => props.theme.palette.bg.dark};
+  border-top: 1px solid ${props => props.theme.palette.bg.light};
+  color: ${props => props.theme.palette.primary.dark};
 `;
 
 const OuterWrapper = styled(Box)`
   display: flex;
   flex-direction: column;
   height: 100%;
+  flex: 1;
 `;
 
-const InnerWrapper = styled(Box)<{ padded: boolean }>`
+const InnerWrapper = styled(Box)<{ noPadding: boolean }>`
   flex: 1;
-  padding: ${props => (props.padded ? props.theme.spacing(2) : 0)};
+  display: flex;
+  padding: ${props => (props.noPadding ? 0 : props.theme.spacing(2))};
 `;
 
 export declare type AppPageProps = Omit<PageProps, 'children'>;
 
-function InnerPage(props: PageProps) {
-  return props.basic ? (
-    <>{props.children}</>
-  ) : (
-    <OuterWrapper>
-      <InnerWrapper padded={!props.noPadding}>
-        {props.showTitle && (
-          <Typography variant="h4" sx={{ mb: 2 }}>
-            {props.title}
-          </Typography>
-        )}
-        {props.children}
-      </InnerWrapper>
-      <AppFooter>
+function AppFooter() {
+  return (
+    <StyledFooter id="app-footer">
+      <Typography variant="code">
         <strong>Orbital Δ</strong> - <AppBuild />
-      </AppFooter>
+      </Typography>
+    </StyledFooter>
+  );
+}
+
+function InnerPage({ children, noPadding = false }: PageProps) {
+  return (
+    <OuterWrapper id="app-page-wrapper">
+      <InnerWrapper id="app-page-content" noPadding={noPadding}>
+        {children}
+      </InnerWrapper>
+      <AppFooter />
     </OuterWrapper>
+  );
+}
+
+function PageFullscreen(props: PageProps) {
+  return (
+    <PageContainer noPadding>
+      <InnerPage {...props} />
+    </PageContainer>
+  );
+}
+
+function PageWithMenu(props: PageProps) {
+  return (
+    <NavigationPage>
+      <PageContainer noPadding>
+        <InnerPage {...props} />
+      </PageContainer>
+    </NavigationPage>
   );
 }
 
@@ -65,15 +86,9 @@ export function Page(props: PageProps) {
         <meta name="description" content={props.description ?? props.title} />
       </Helmet>
       {props.noSidebar ? (
-        <PageContainer noPadding={props.noPadding}>
-          {props.children}
-        </PageContainer>
+        <PageFullscreen {...props} />
       ) : (
-        <NavigationPage>
-          <PageContainer noPadding>
-            <InnerPage {...props} />
-          </PageContainer>
-        </NavigationPage>
+        <PageWithMenu {...props} />
       )}
     </>
   );

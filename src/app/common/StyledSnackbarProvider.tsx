@@ -3,6 +3,16 @@ import { SnackbarProvider } from 'notistack';
 import styled from 'styled-components';
 
 const Snackbar = styled(SnackbarProvider)`
+  &.SnackbarItem-variantSuccess,
+  &.SnackbarItem-variantInfo,
+  &.SnackbarItem-variantError,
+  &.SnackbarItem-variantWarning {
+    color: ${props => props.theme.palette.primary.contrastText};
+
+    .MuiSvgIcon-root {
+      color: ${props => props.theme.palette.primary.contrastText};
+    }
+  }
   &.SnackbarItem-variantSuccess {
     background-color: ${props => props.theme.palette.success.main};
   }
@@ -14,11 +24,6 @@ const Snackbar = styled(SnackbarProvider)`
   }
   &.SnackbarItem-variantWarning {
     background-color: ${props => props.theme.palette.warning.main};
-  }
-  &.SnackbarItem-action {
-    &.MuiButton-root {
-      color: '#000' !important;
-    }
   }
 `;
 
