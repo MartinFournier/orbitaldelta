@@ -13,9 +13,9 @@ export const colors = {
   textPrimary: '#efe9ec',
   textSecondary: '#c2e0ff',
 
-  success: '#21D9A3',
-  warning: '#D9A20B',
-  info: '#16A7D9',
+  success: '#68F386',
+  warning: '#E0BD52',
+  info: '##068D9D',
   error: '#D92B57',
 };
 
@@ -85,9 +85,17 @@ const theme = createTheme({
     },
     prose: {
       fontFamily: fonts.prose,
+      fontWeight: 500,
+      fontSize: 20,
+      lineHeight: 1.5,
+      marginBottom: 1,
     },
     code: {
       fontFamily: fonts.monospace,
+      fontWeight: 500,
+      // fontSize: 20,
+      lineHeight: 1.5,
+      marginBottom: 1,
     },
   },
 

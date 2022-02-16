@@ -1,30 +1,18 @@
-import { Box, Tabs, Tab } from '@mui/material';
-import { AppTabPanel } from 'app/common/AppTabPanel';
+import { TabbedData, TabbedContent } from 'app/common/TabbedContent';
 import React from 'react';
 import AutosaveSlider from './Autosave';
 import { ShowEngineStats } from './ShowEngineStats';
 
 export function Settings() {
-  const [value, setValue] = React.useState(0);
+  const gameplay = <AutosaveSlider />;
+  const hotkeys = <>Hotkeys here</>;
+  const debug = <ShowEngineStats />;
 
-  return (
-    <Box>
-      <Box sx={{ width: '100%' }}>
-        <Tabs value={value} onChange={(e, newValue) => setValue(newValue)}>
-          <Tab label="Gameplay" />
-          <Tab label="Hotkeys" />
-          <Tab label="Debug" />
-        </Tabs>
-      </Box>
-      <AppTabPanel currentValue={value} index={0}>
-        <AutosaveSlider />
-      </AppTabPanel>
-      <AppTabPanel currentValue={value} index={1}>
-        Hotkeys here
-      </AppTabPanel>
-      <AppTabPanel currentValue={value} index={2}>
-        <ShowEngineStats />
-      </AppTabPanel>
-    </Box>
-  );
+  const tabs: TabbedData[] = [
+    { id: 'settings-gameplay', label: 'Gameplay', content: gameplay },
+    { id: 'settings-hotkeys', label: 'Hotkeys', content: hotkeys },
+    { id: 'settings-debug', label: 'Debug', content: debug },
+  ];
+
+  return <TabbedContent tabs={tabs} />;
 }

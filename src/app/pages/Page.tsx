@@ -15,7 +15,7 @@ export interface PageProps extends AppPage {
 }
 
 const StyledFooter = styled(Box)`
-  margin-top: ${props => props.theme.spacing(2)};
+  /* margin-top: ${props => props.theme.spacing(2)}; */
   padding: ${props => props.theme.spacing(1)};
   font-size: 0.8em;
   text-align: center;
@@ -35,6 +35,18 @@ const InnerWrapper = styled(Box)<{ noPadding: boolean }>`
   flex: 1;
   display: flex;
   padding: ${props => (props.noPadding ? 0 : props.theme.spacing(2))};
+  /* overflow-y: scroll; */
+  scrollbar-width: thin;
+  scrollbar-color: ${props => props.theme.palette.secondary.main}
+    ${props => props.theme.palette.bg.light};
+`;
+
+const TopBar = styled(Box)`
+  background-color: ${props => props.theme.palette.primary.dark};
+  border-bottom: 1px solid ${props => props.theme.palette.primary.light};
+  color: ${props => props.theme.palette.bg.dark};
+  padding: ${props => props.theme.spacing(1)};
+  font-weight: 500;
 `;
 
 export declare type AppPageProps = Omit<PageProps, 'children'>;
@@ -52,6 +64,9 @@ function AppFooter() {
 function InnerPage({ children, noPadding = false }: PageProps) {
   return (
     <OuterWrapper id="app-page-wrapper">
+      <TopBar id="app-top-bar">
+        <Typography variant="code">ABC</Typography>
+      </TopBar>
       <InnerWrapper id="app-page-content" noPadding={noPadding}>
         {children}
       </InnerWrapper>

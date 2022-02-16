@@ -1,12 +1,10 @@
 import * as React from 'react';
-import { Box, Button, Tabs, Tab } from '@mui/material';
+import { Button } from '@mui/material';
 import toastActions from 'app/common/Toasts';
-import { AppTabPanel } from 'app/common/AppTabPanel';
 import { TypographyDemo } from './TypographyDemo';
+import { TabbedContent, TabbedData } from 'app/common/TabbedContent';
 
 export function DeveloperTools() {
-  const [value, setValue] = React.useState(0);
-
   const handleClick = () => {
     toastActions.info('Information!', { autoHideDuration: 30_000 });
     toastActions.success('Success!', { autoHideDuration: 30_000 });
@@ -15,23 +13,17 @@ export function DeveloperTools() {
     toastActions.toast('Toast!', { autoHideDuration: 30_000 });
   };
 
-  return (
-    <Box>
-      <Box sx={{ width: '100%' }}>
-        <Tabs value={value} onChange={(e, newValue) => setValue(newValue)}>
-          <Tab label="Actions" />
-          <Tab label="Typography" />
-          <Tab label="Buttons" />
-        </Tabs>
-      </Box>
-      <AppTabPanel currentValue={value} index={0}>
-        <Button variant="outlined" onClick={handleClick}>
-          Toasts
-        </Button>
-      </AppTabPanel>
-      <AppTabPanel currentValue={value} index={1}>
-        <TypographyDemo />
-      </AppTabPanel>
-    </Box>
+  const actions = (
+    <Button variant="outlined" onClick={handleClick}>
+      Toasts
+    </Button>
   );
+
+  const typography = <TypographyDemo />;
+  const tabs: TabbedData[] = [
+    { id: 'dev-actions', label: 'Actions', content: actions },
+    { id: 'dev-typography', label: 'Typography', content: typography },
+  ];
+
+  return <TabbedContent tabs={tabs} />;
 }
