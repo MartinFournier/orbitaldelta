@@ -37,6 +37,8 @@ ReactDOM.render(
   MOUNT_NODE,
 );
 
+const clearConsoleOnReload = true;
+
 // Hot reloadable translation json files
 if (module.hot) {
   module.hot.accept(['./locales/i18n'], () => {
@@ -46,6 +48,11 @@ if (module.hot) {
   // Write to the console to see when app was updated
   module.hot.addStatusHandler(status => {
     if (status === 'prepare') {
+      if (clearConsoleOnReload) {
+        console.clear();
+      } else {
+        console.log('='.repeat(50));
+      }
       console.log('='.repeat(50));
       console.log('Hot Reload > Refreshed');
       console.log('='.repeat(50));

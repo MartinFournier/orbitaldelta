@@ -1,5 +1,4 @@
 import {
-  Box,
   Divider,
   Link,
   List,
@@ -8,6 +7,7 @@ import {
   Paper,
   Typography,
 } from '@mui/material';
+import { ContentMain } from 'app/common/ContentMain';
 import { Page, AppPageProps } from 'app/pages/Page';
 import * as React from 'react';
 import styled from 'styled-components';
@@ -15,14 +15,11 @@ import styled from 'styled-components';
 export function AboutPage(props: AppPageProps) {
   return (
     <Page {...props}>
-      <Box sx={{ py: 2 }}>
+      <ContentMain>
         <Typography variant="h2" gutterBottom>
           About the Game
         </Typography>
         <Info>
-          {/* <Typography variant="h5" gutterBottom>
-            abc
-          </Typography> */}
           <Typography variant="body1">
             Orbital Δ is a game about automating rocket launches, completing
             contracts and discovering the universe.
@@ -73,7 +70,7 @@ export function AboutPage(props: AppPageProps) {
             </ListItem>
           </List>
         </Info>
-      </Box>
+      </ContentMain>
     </Page>
   );
 }

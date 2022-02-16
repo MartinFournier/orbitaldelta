@@ -9,13 +9,12 @@ import styled from 'styled-components';
 
 export interface PageProps extends AppPage {
   children: React.ReactNode;
-  basic?: boolean;
-  noSidebar?: boolean;
   noPadding?: boolean;
+  noSidebar?: boolean;
+  noTopbar?: boolean;
 }
 
 const StyledFooter = styled(Box)`
-  /* margin-top: ${props => props.theme.spacing(2)}; */
   padding: ${props => props.theme.spacing(1)};
   font-size: 0.8em;
   text-align: center;
@@ -27,15 +26,13 @@ const StyledFooter = styled(Box)`
 const OuterWrapper = styled(Box)`
   display: flex;
   flex-direction: column;
-  height: 100%;
   flex: 1;
+  max-height: 100vh;
 `;
 
-const InnerWrapper = styled(Box)<{ noPadding: boolean }>`
+const InnerWrapper = styled(Box)`
   flex: 1;
   display: flex;
-  padding: ${props => (props.noPadding ? 0 : props.theme.spacing(2))};
-  /* overflow-y: scroll; */
   scrollbar-width: thin;
   scrollbar-color: ${props => props.theme.palette.secondary.main}
     ${props => props.theme.palette.bg.light};
@@ -61,15 +58,15 @@ function AppFooter() {
   );
 }
 
-function InnerPage({ children, noPadding = false }: PageProps) {
+function InnerPage({ children, noTopbar = false }: PageProps) {
   return (
-    <OuterWrapper id="app-page-wrapper">
-      <TopBar id="app-top-bar">
-        <Typography variant="code">ABC</Typography>
-      </TopBar>
-      <InnerWrapper id="app-page-content" noPadding={noPadding}>
-        {children}
-      </InnerWrapper>
+    <OuterWrapper id="app-page">
+      {!noTopbar && (
+        <TopBar id="app-top-bar">
+          <Typography variant="code">Lorem Ipsum</Typography>
+        </TopBar>
+      )}
+      <InnerWrapper id="app-content">{children}</InnerWrapper>
       <AppFooter />
     </OuterWrapper>
   );

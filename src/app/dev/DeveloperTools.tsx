@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Button } from '@mui/material';
 import toastActions from 'app/common/Toasts';
 import { TypographyDemo } from './TypographyDemo';
-import { TabbedContent, TabbedData } from 'app/common/TabbedContent';
+import { ContentTabbed, TabbedData } from 'app/common/ContentTabbed';
 
 export function DeveloperTools() {
   const handleClick = () => {
@@ -25,5 +25,5 @@ export function DeveloperTools() {
     { id: 'dev-typography', label: 'Typography', content: typography },
   ];
 
-  return <TabbedContent tabs={tabs} />;
+  return <ContentTabbed tabs={tabs} />;
 }

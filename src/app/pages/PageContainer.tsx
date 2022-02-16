@@ -11,7 +11,7 @@ const Main = styled(Box)<{ noPadding: boolean }>`
   min-height: 100vh;
   flex: 1;
 
-  & #app-content {
+  & #app-inner {
     padding: ${props => (props.noPadding ? 0 : props.theme.spacing(2))};
     height: 100vh;
     display: flex;
@@ -23,8 +23,8 @@ export default function PageContainer({
   noPadding = false,
 }: PageContainerProps) {
   return (
-    <Main id="app-content-wrapper" component="main" noPadding={noPadding}>
-      <Box id="app-content">{children}</Box>
+    <Main id="app-outer" component="main" noPadding={noPadding}>
+      <Box id="app-inner">{children}</Box>
     </Main>
   );
 }

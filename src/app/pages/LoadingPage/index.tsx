@@ -8,6 +8,7 @@ export function LoadingPage(props: AppPageProps) {
   return (
     <PageSplash
       noSidebar
+      noTopbar
       splashTitle={<Title variant="h1">Loading</Title>}
       {...props}
     >

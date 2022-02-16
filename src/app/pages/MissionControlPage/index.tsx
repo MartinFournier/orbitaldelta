@@ -3,6 +3,7 @@ import { Page, AppPageProps } from '../Page';
 import { SaveGameButton } from 'app/engine/SaveGameButton';
 import { PlayerName } from 'app/player/PlayerName';
 import * as React from 'react';
+import { ContentMain } from 'app/common/ContentMain';
 
 interface MissionControlProps extends AppPageProps {
   saveFn: () => Promise<unknown>;
@@ -14,14 +15,14 @@ export function MissionControlPage({
 }: MissionControlProps) {
   return (
     <Page {...pageProps}>
-      <Box>
+      <ContentMain>
         <Box>
           <PlayerName />
         </Box>
         <Box sx={{ my: 4 }}>
           <SaveGameButton saveFn={saveFn} size="large" />
         </Box>
-      </Box>
+      </ContentMain>
     </Page>
   );
 }

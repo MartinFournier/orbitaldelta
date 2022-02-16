@@ -1,4 +1,4 @@
-import { TabbedData, TabbedContent } from 'app/common/TabbedContent';
+import { TabbedData, ContentTabbed } from 'app/common/ContentTabbed';
 import React from 'react';
 import AutosaveSlider from './Autosave';
 import { ShowEngineStats } from './ShowEngineStats';
@@ -14,5 +14,5 @@ export function Settings() {
     { id: 'settings-debug', label: 'Debug', content: debug },
   ];
 
-  return <TabbedContent tabs={tabs} />;
+  return <ContentTabbed tabs={tabs} />;
 }

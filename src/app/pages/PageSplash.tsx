@@ -14,7 +14,7 @@ export default function PageSplash({
   ...pageProps
 }: PageSplashProps) {
   return (
-    <Page basic {...pageProps}>
+    <Page {...pageProps}>
       <SplashContainer id="app-splash-container">
         <Title id="app-splash-title">{splashTitle}</Title>
         <Box id="app-splash-content">{children}</Box>
@@ -24,12 +24,11 @@ export default function PageSplash({
 }
 
 const SplashContainer = styled(Box)`
-  /* height: 100vh; */
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  min-height: 320px;
+  min-height: 220px;
   flex: 1;
   padding: ${props => props.theme.spacing(2)};
 `;

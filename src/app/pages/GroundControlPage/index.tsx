@@ -1,11 +1,11 @@
-import { Box } from '@mui/material';
 import { Page, AppPageProps } from '../Page';
 import * as React from 'react';
+import { ContentMain } from 'app/common/ContentMain';
 
 export function GroundControlPage({ ...pageProps }: AppPageProps) {
   return (
     <Page {...pageProps}>
-      <Box>Lorem Ipsum</Box>
+      <ContentMain>Lorem Ipsum</ContentMain>
     </Page>
   );
 }

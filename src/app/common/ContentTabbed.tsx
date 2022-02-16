@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Tabs, Tab } from '@mui/material';
+import { Box, Tabs, Tab, styled } from '@mui/material';
 import { AppTabPanel } from 'app/common/AppTabPanel';
 
 export type TabbedData = {
@@ -8,11 +8,11 @@ export type TabbedData = {
   content: React.ReactNode;
 };
 
-export type TabbedContentProps = {
+export type ContentTabbedProps = {
   tabs: TabbedData[];
 };
 
-export function TabbedContent({ tabs }: TabbedContentProps) {
+export function ContentTabbed({ tabs }: ContentTabbedProps) {
   const [selectedTab, setSelectedTab] = React.useState(0);
 
   const tabEntries = tabs.map(t => (
@@ -30,7 +30,7 @@ export function TabbedContent({ tabs }: TabbedContentProps) {
   ));
 
   return (
-    <Box id="app-tabbed-page" sx={{ flex: 1 }}>
+    <TabPageWrapper id="app-tabbed-page">
       <Box id="app-tabs-container">
         <Tabs
           value={selectedTab}
@@ -39,7 +39,21 @@ export function TabbedContent({ tabs }: TabbedContentProps) {
           {tabEntries}
         </Tabs>
       </Box>
-      <Box id="app-tabbed-content">{tabContent}</Box>
-    </Box>
+      <TabbedContentContainer id="app-tabbed-content">
+        {tabContent}
+      </TabbedContentContainer>
+    </TabPageWrapper>
   );
 }
+
+const TabPageWrapper = styled(Box)`
+  flex: 1;
+  flex-direction: column;
+  display: flex;
+`;
+
+const TabbedContentContainer = styled(Box)`
+  overflow-y: auto;
+  height: 100px;
+  flex: 1 1 auto;
+`;
