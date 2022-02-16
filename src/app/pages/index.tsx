@@ -5,6 +5,7 @@ import AssessmentOutlinedIcon from '@mui/icons-material/AssessmentOutlined';
 import SettingsIcon from '@mui/icons-material/Settings';
 import InfoIcon from '@mui/icons-material/Info';
 import LogoDevIcon from '@mui/icons-material/LogoDev';
+import RocketIcon from '@mui/icons-material/Rocket';
 import LocationCityIcon from '@mui/icons-material/LocationCity';
 
 export declare type AppPage = {
@@ -33,17 +34,23 @@ const pageCategories: { [key: string]: AppPageCategory } = {
 };
 
 const pages: { [key: string]: AppPage } = {
-  main: {
-    title: 'Main',
+  missionControl: {
+    title: 'Mission Control',
     route: '/',
     category: 'main',
     icon: <AssessmentOutlinedIcon />,
+  },
+  vehiculeAssembly: {
+    title: 'Vehicule Assembly',
+    route: '/vehicule-assembly',
+    category: 'main',
+    icon: <LocationCityIcon />,
   },
   groundControl: {
     title: 'Ground Control',
     route: '/ground-control',
     category: 'main',
-    icon: <LocationCityIcon />,
+    icon: <RocketIcon />,
   },
   orbital: {
     title: 'Orbital View',

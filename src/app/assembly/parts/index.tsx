@@ -1,5 +1,5 @@
 export {};
 
-type BasePart = {
+export type AssemblyPart = {
   name: string;
 };

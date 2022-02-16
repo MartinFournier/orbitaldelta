@@ -9,13 +9,14 @@ import { Engine } from './engine';
 import { ErrorHandler } from './error-handler';
 
 import pages from './pages';
-import { HomePage } from './pages/HomePage';
+import { MissionControlPage } from './pages/MissionControlPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { AboutPage } from './pages/AboutPage';
 import { SettingsPage } from './pages/SettingsPage';
 import { LoadingPage } from './pages/LoadingPage';
 import { GlobalHotkeys } from './hotkeys';
 import { GroundControlPage } from './pages/GroundControlPage';
+import { VehiculeAssemblyPage } from './pages/VehiculeAssemblyPage';
 import { DevPage } from './pages/DevPage';
 
 import buildInfo from 'utilities/buildInfo';
@@ -30,12 +31,21 @@ function AppRoutes({ persistor }: AppProps) {
   return (
     <Routes>
       <Route
-        path={pages.main.route}
-        element={<HomePage saveFn={persistor.flush} {...pages.main} />}
+        path={pages.missionControl.route}
+        element={
+          <MissionControlPage
+            saveFn={persistor.flush}
+            {...pages.missionControl}
+          />
+        }
       />
       <Route
         path={pages.groundControl.route}
         element={<GroundControlPage {...pages.groundControl} />}
+      />
+      <Route
+        path={pages.vehiculeAssembly.route}
+        element={<VehiculeAssemblyPage {...pages.vehiculeAssembly} />}
       />
       <Route
         path={pages.settings.route}

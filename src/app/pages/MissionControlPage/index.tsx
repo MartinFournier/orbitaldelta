@@ -4,11 +4,14 @@ import { SaveGameButton } from 'app/engine/SaveGameButton';
 import { PlayerName } from 'app/player/PlayerName';
 import * as React from 'react';
 
-interface HomeProps extends AppPageProps {
+interface MissionControlProps extends AppPageProps {
   saveFn: () => Promise<unknown>;
 }
 
-export function HomePage({ saveFn, ...pageProps }: HomeProps) {
+export function MissionControlPage({
+  saveFn,
+  ...pageProps
+}: MissionControlProps) {
   return (
     <Page {...pageProps}>
       <Box>
