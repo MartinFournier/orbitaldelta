@@ -15,8 +15,9 @@ const slice = createSlice({
     changeUsername(state, action: PayloadAction<string>) {
       state.username = action.payload;
     },
-    changeLastProcessed(state, action: PayloadAction<number>) {
+    markAsProcessed(state, action: PayloadAction<number>) {
       state.lastProcessedOn = action.payload;
+      state.processingDeltaMs = 0;
     },
     incrementProcessingDeltaMs(state, action: PayloadAction<number>) {
       state.processingDeltaMs = state.processingDeltaMs + action.payload;

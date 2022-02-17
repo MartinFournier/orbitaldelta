@@ -6,6 +6,7 @@ import NavigationPage from './NavigationPage';
 import { AppPage } from '.';
 import PageContainer from './PageContainer';
 import styled from 'styled-components';
+import { DisplayDateTime } from 'app/game-time/DisplayDateTime';
 
 export interface PageProps extends AppPage {
   children: React.ReactNode;
@@ -64,6 +65,7 @@ function InnerPage({ children, noTopbar = false }: PageProps) {
       {!noTopbar && (
         <TopBar id="app-top-bar">
           <Typography variant="code">Lorem Ipsum</Typography>
+          <DisplayDateTime />
         </TopBar>
       )}
       <InnerWrapper id="app-content">{children}</InnerWrapper>

@@ -5,5 +5,5 @@ import { playerActions } from 'app/player/slice';
  */
 export const devtoolBlackListedActions = [
   playerActions.incrementProcessingDeltaMs.type,
-  playerActions.changeLastProcessed.type,
+  playerActions.markAsProcessed.type,
 ];

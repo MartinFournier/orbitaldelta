@@ -6,6 +6,7 @@ import { playerActions } from '../player/slice';
 import { EngineInfo } from './EngineInfo';
 import { useAppSelector } from 'store/hooks';
 import { selectShowEngineStats } from './slice/selectors';
+import { gameTimeActions } from 'app/game-time/slice';
 
 interface EngineProps {
   children: React.ReactNode;
@@ -18,6 +19,7 @@ export function Engine({ children }: EngineProps) {
     const handler = (deltaMs: number) => {
       console.debug(`Engine Processing -> Delta: ${deltaMs.toFixed(2)}ms.`);
       dispatch(playerActions.incrementProcessingDeltaMs(deltaMs));
+      dispatch(gameTimeActions.incrementProcessingDeltaMs(deltaMs));
     };
     return handler;
   }, [dispatch]);
