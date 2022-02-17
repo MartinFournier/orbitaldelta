@@ -1,11 +1,7 @@
-import { playerActions } from 'app/player/slice';
 import { createLogger } from 'redux-logger';
-
-const ignoredActions = [
-  playerActions.incrementProcessingDeltaMs.type,
-  playerActions.markAsProcessed.type,
-];
+import { devtoolBlackListedActions } from './devTool';
 
 export default createLogger({
-  predicate: (getState, action) => !ignoredActions.includes(action.type),
+  predicate: (getState, action) =>
+    !devtoolBlackListedActions.includes(action.type),
 });

@@ -6,6 +6,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useNavigate } from 'react-router-dom';
 import { usePersistor } from './usePersistor';
+import { sleep } from 'utilities/dev';
 
 export function DeleteSaveGameButton(props: MuiButtonProps) {
   const persistor = usePersistor();
@@ -14,11 +15,13 @@ export function DeleteSaveGameButton(props: MuiButtonProps) {
 
   const onButtonClick = async () => {
     if (!persistor) return;
+    persistor.pause();
     setIsDeleting(true);
     await persistor?.purge();
     navigate('/');
-    window.location.reload();
+    await sleep(2000);
     setIsDeleting(false);
+    window.location.reload();
   };
   return (
     <Tooltip title={<span>Delete game data</span>}>
