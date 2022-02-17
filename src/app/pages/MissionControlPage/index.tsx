@@ -4,23 +4,18 @@ import { SaveGameButton } from 'app/engine/SaveGameButton';
 import { PlayerName } from 'app/player/PlayerName';
 import * as React from 'react';
 import { ContentMain } from 'app/common/ContentMain';
+import { DeleteSaveGameButton } from 'app/engine/DeleteSaveGameButton';
 
-interface MissionControlProps extends AppPageProps {
-  saveFn: () => Promise<unknown>;
-}
-
-export function MissionControlPage({
-  saveFn,
-  ...pageProps
-}: MissionControlProps) {
+export function MissionControlPage(props: AppPageProps) {
   return (
-    <Page {...pageProps}>
+    <Page {...props}>
       <ContentMain>
         <Box>
           <PlayerName />
         </Box>
         <Box sx={{ my: 4 }}>
-          <SaveGameButton saveFn={saveFn} size="large" />
+          <SaveGameButton size="large" />
+          <DeleteSaveGameButton size="large" />
         </Box>
       </ContentMain>
     </Page>

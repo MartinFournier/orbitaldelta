@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -22,22 +22,18 @@ import { DevPage } from './pages/DevPage';
 import buildInfo from 'utilities/buildInfo';
 import { StyledSnackbarProvider } from './common/StyledSnackbarProvider';
 import AppThemeProvider from 'styles/provider';
+import { PersistorProvider } from './engine/usePersistor';
 
 interface AppProps {
   persistor: Persistor;
 }
 
-function AppRoutes({ persistor }: AppProps) {
+function AppRoutes() {
   return (
     <Routes>
       <Route
         path={pages.missionControl.route}
-        element={
-          <MissionControlPage
-            saveFn={persistor.flush}
-            {...pages.missionControl}
-          />
-        }
+        element={<MissionControlPage {...pages.missionControl} />}
       />
       <Route
         path={pages.groundControl.route}
@@ -87,14 +83,16 @@ export function App(props: AppProps) {
             loading={<LoadingPage {...pages.loading} />}
             persistor={props.persistor}
           >
-            <GlobalHotkeys>
-              <StyledSnackbarProvider>
-                <SnackbarUtilsConfigurator />
-                <Engine>
-                  <AppRoutes {...props} />
-                </Engine>
-              </StyledSnackbarProvider>
-            </GlobalHotkeys>
+            <PersistorProvider persistor={props.persistor}>
+              <GlobalHotkeys>
+                <StyledSnackbarProvider>
+                  <SnackbarUtilsConfigurator />
+                  <Engine>
+                    <AppRoutes />
+                  </Engine>
+                </StyledSnackbarProvider>
+              </GlobalHotkeys>
+            </PersistorProvider>
           </PersistGate>
         </ErrorHandler>
       </AppThemeProvider>

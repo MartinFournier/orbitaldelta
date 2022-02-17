@@ -8,27 +8,29 @@ import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { selectGameSavedOn, selectIsGameSaving } from './slice/selectors';
 import { saveGame } from './slice';
 import { notifications } from 'app/common/Toasts';
-interface ButtonProps extends MuiButtonProps {
-  saveFn: () => Promise<unknown>;
-}
+import { usePersistor } from './usePersistor';
 
-export function SaveGameButton({ saveFn: flush }: ButtonProps) {
+export function SaveGameButton({ ...buttonProps }: MuiButtonProps) {
+  const persistor = usePersistor();
   const dispatch = useAppDispatch();
   const savedOn = useAppSelector(selectGameSavedOn);
   const isSaving = useAppSelector(selectIsGameSaving);
 
   const onButtonClick = async () => {
-    await dispatch(saveGame(flush));
+    if (!persistor) return;
+    await dispatch(saveGame(persistor.flush));
     notifications.gameSaved();
   };
+
   return (
-    <Tooltip title={<span>Saved on: {savedOn}</span>}>
+    <Tooltip title={<span>Last saved on: {savedOn}</span>}>
       <span>
         <Button
           variant="contained"
           disabled={isSaving}
           startIcon={<SaveIcon />}
           onClick={onButtonClick}
+          {...buttonProps}
         >
           {isSaving && (
             <CircularProgress
