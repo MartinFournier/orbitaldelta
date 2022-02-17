@@ -14,8 +14,8 @@ export function MissionControlPage(props: AppPageProps) {
           <PlayerName />
         </Box>
         <Box sx={{ my: 4 }}>
-          <SaveGameButton size="large" />
-          <DeleteSaveGameButton size="large" />
+          <SaveGameButton size="large" sx={{ mr: 1 }} />
+          <DeleteSaveGameButton size="large" color="error" variant="outlined" />
         </Box>
       </ContentMain>
     </Page>

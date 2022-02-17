@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import { sleep } from 'utilities/dev';
 
 export const initialState = {
   gameSavedOn: 0,
@@ -11,7 +12,14 @@ export type EngineState = typeof initialState;
 export const saveGame = createAsyncThunk(
   'engine/saveGame',
   async (saveFn: () => Promise<unknown>) => {
+    const then = new Date().getTime();
     await saveFn();
+    const now = new Date().getTime();
+    const timeElapsed = now - then;
+    if (timeElapsed < 1000) {
+      // We want a fake loading time so the action is visible.
+      await sleep(1000 - timeElapsed);
+    }
     return {
       completedOn: new Date().getTime(),
     };
@@ -37,6 +45,9 @@ const slice = createSlice({
   },
 });
 
-export const { actions: engineAction, reducer } = slice;
+export const {
+  actions: { ...engineAction },
+  reducer,
+} = slice;
 
 export default slice.reducer;

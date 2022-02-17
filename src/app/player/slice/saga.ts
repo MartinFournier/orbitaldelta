@@ -2,9 +2,7 @@ import { call, put, select, delay, takeLeading } from 'redux-saga/effects';
 import { selectPlayer } from './selectors';
 import { playerActions, PlayerState } from '.';
 import { updatePlayer as processPlayer } from '..';
-import { createAction, PayloadAction } from '@reduxjs/toolkit';
-
-export const playerUpdateSaga = createAction<number>('player/playerUpdate');
+import { PayloadAction } from '@reduxjs/toolkit';
 
 export function* process(action: PayloadAction<number>) {
   const player: PlayerState = yield select(selectPlayer);

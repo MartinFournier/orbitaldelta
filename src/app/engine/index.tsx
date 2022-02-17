@@ -17,14 +17,14 @@ export function Engine({ children }: EngineProps) {
   const showEngineStats = useAppSelector(selectShowEngineStats);
   const handleProcessing = useMemo(() => {
     const handler = (deltaMs: number) => {
-      console.debug(`Engine Processing -> Delta: ${deltaMs.toFixed(2)}ms.`);
+      // console.debug(`Engine Processing -> Delta: ${deltaMs.toFixed(2)}ms.`);
       dispatch(playerActions.incrementProcessingDeltaMs(deltaMs));
-      dispatch(gameTimeActions.incrementProcessingDeltaMs(deltaMs));
+      dispatch(gameTimeActions.incrementDeltaMs(deltaMs));
     };
     return handler;
   }, [dispatch]);
 
-  const timings = useGameLoop(handleProcessing, 5000);
+  const timings = useGameLoop(handleProcessing, 50);
   return (
     <>
       {children}

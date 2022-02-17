@@ -10,4 +10,9 @@ export const selectCurrentTime = createSelector(
   state => state.currentTime,
 );
 
+export const selectCurrentSpeed = createSelector([domain], state => ({
+  speed: state.speedMultiplier,
+  isPaused: state.isPaused,
+}));
+
 export const selectGameTime = createSelector([domain], state => state);
