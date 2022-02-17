@@ -1,13 +1,13 @@
 import { Link, Tooltip } from '@mui/material';
 import * as React from 'react';
 import buildInfo from 'utilities/buildInfo';
-import { formatDateTime, formatDateShort } from 'utilities/formatting';
+import { formatDateTime, formatDate } from 'utilities/formatting';
 
 const baseUrl = 'https://github.com/MartinFournier/orbitaltarget/commit';
 
 export function AppBuild({ noLink = false }: { noLink?: boolean }) {
   const date = new Date(buildInfo.time);
-  const displayDate = formatDateShort(date);
+  const displayDate = formatDate(date);
   const displayDateDetailed = formatDateTime(date);
   return (
     <>

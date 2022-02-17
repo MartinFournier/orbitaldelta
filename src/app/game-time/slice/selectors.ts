@@ -15,4 +15,6 @@ export const selectCurrentSpeed = createSelector([domain], state => ({
   isPaused: state.isPaused,
 }));
 
+export const selectIsPaused = createSelector([domain], state => state.isPaused);
+
 export const selectGameTime = createSelector([domain], state => state);

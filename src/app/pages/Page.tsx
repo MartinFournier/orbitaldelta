@@ -6,8 +6,7 @@ import NavigationPage from './NavigationPage';
 import { AppPage } from '.';
 import PageContainer from './PageContainer';
 import styled from 'styled-components';
-import { DisplayDateTime } from 'app/game-time/DisplayDateTime';
-import GameSpeedButtons from 'app/game-time/GameSpeedButtons';
+import { TopGameDisplay } from 'app/game-time/TopGameDisplay';
 
 export interface PageProps extends AppPage {
   children: React.ReactNode;
@@ -65,8 +64,7 @@ function InnerPage({ children, noTopbar = false }: PageProps) {
     <OuterWrapper id="app-page">
       {!noTopbar && (
         <TopBar id="app-top-bar">
-          <DisplayDateTime />
-          <GameSpeedButtons />
+          <TopGameDisplay />
         </TopBar>
       )}
       <InnerWrapper id="app-content">{children}</InnerWrapper>

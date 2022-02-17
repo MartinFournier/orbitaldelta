@@ -1,5 +1,4 @@
 import React from 'react';
-import Box from '@mui/material/Box';
 import { selectCurrentSpeed } from './slice/selectors';
 import { gameTimeActions } from './slice';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
@@ -39,28 +38,34 @@ export default function GameSpeedButtons() {
   );
 
   return (
-    <Box sx={{ width: 300 }}>
-      <ButtonGroup aria-label="outlined button group">
-        {PauseButton}
-        {gameSpeeds.map(speed => (
-          <Tooltip
-            key={`speed-button-x${speed}`}
-            title={`Modify Time Flow to x${speed}`}
+    <ButtonGroup
+      aria-label="outlined button group"
+      sx={{ alignSelf: 'flex-end' }}
+    >
+      {PauseButton}
+      {gameSpeeds.map(speed => (
+        <Tooltip
+          key={`speed-button-x${speed}`}
+          title={`Modify Time Flow to x${speed}`}
+        >
+          <Button
+            color={
+              currentSpeed.speed === speed && currentSpeed.isPaused
+                ? 'secondary'
+                : 'primary'
+            }
+            variant={currentSpeed.speed === speed ? 'contained' : 'outlined'}
+            onClick={() => setSpeed(speed)}
           >
-            <Button
-              variant={currentSpeed.speed === speed ? 'contained' : 'outlined'}
-              onClick={() => setSpeed(speed)}
-            >
-              x{speed}
-            </Button>
-          </Tooltip>
-        ))}
-      </ButtonGroup>
-    </Box>
+            x{speed}
+          </Button>
+        </Tooltip>
+      ))}
+    </ButtonGroup>
   );
 }
 
 const StyledPauseButton = styled(IconButton)`
-  border: 1px dashed;
-  margin-right: ${props => props.theme.spacing(1)};
+  border: 1px solid;
+  margin-right: ${props => props.theme.spacing(2)};
 `;
