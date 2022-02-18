@@ -38,34 +38,38 @@ export default function GameSpeedButtons() {
   );
 
   return (
-    <StyledButtonGroup
-      aria-label="outlined button group"
-      sx={{ alignSelf: 'flex-end' }}
-    >
+    <>
       {PauseButton}
-      {gameSpeeds.map(speed => (
-        <Tooltip
-          key={`speed-button-x${speed}`}
-          title={`Modify Time Flow to x${speed}`}
-        >
-          <Button
-            color={
-              currentSpeed.speed === speed && currentSpeed.isPaused
-                ? 'secondary'
-                : 'primary'
-            }
-            variant={
-              currentSpeed.speed === speed && !currentSpeed.isPaused
-                ? 'contained'
-                : 'outlined'
-            }
-            onClick={() => setSpeed(speed)}
+
+      <StyledButtonGroup
+        aria-label="Speed Button Group"
+        size="large"
+        sx={{ alignSelf: 'flex-end' }}
+      >
+        {gameSpeeds.map(speed => (
+          <Tooltip
+            key={`speed-button-x${speed}`}
+            title={`Modify Time Flow to x${speed}`}
           >
-            x{speed}
-          </Button>
-        </Tooltip>
-      ))}
-    </StyledButtonGroup>
+            <Button
+              color={
+                currentSpeed.speed === speed && currentSpeed.isPaused
+                  ? 'secondary'
+                  : 'primary'
+              }
+              variant={
+                currentSpeed.speed === speed && !currentSpeed.isPaused
+                  ? 'contained'
+                  : 'outlined'
+              }
+              onClick={() => setSpeed(speed)}
+            >
+              x{speed}
+            </Button>
+          </Tooltip>
+        ))}
+      </StyledButtonGroup>
+    </>
   );
 }
 
