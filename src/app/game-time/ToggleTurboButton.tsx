@@ -5,31 +5,32 @@ import SpeedIcon from '@mui/icons-material/Speed';
 
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 
-import { selectTurbo } from './slice/selectors';
+import { selectTurbo, selectTurboAvailability } from './slice/selectors';
 import { gameTimeActions } from './slice';
 
 export default function ToggleTurboButton() {
   const dispatch = useAppDispatch();
   const turbo = useAppSelector(selectTurbo);
+  const turboAvailability = useAppSelector(selectTurboAvailability);
 
   const handleChangePause = (e: React.MouseEvent<HTMLButtonElement>) => {
     dispatch(gameTimeActions.toggleTurbo());
   };
 
-  const label = turbo.isTurboing ? 'Disable Turbo' : 'Enable Turbo';
+  const label = turbo ? 'Disable Turbo' : 'Enable Turbo';
   const TurboButton = (
     <Tooltip title={label}>
       <StyledTurboButton
         size="small"
         aria-label={label}
-        color={turbo.isTurboing ? 'warning' : 'primary'}
+        color={turbo ? 'warning' : 'primary'}
         onClick={handleChangePause}
       >
         <SpeedIcon />
         <CircularProgress
           variant="determinate"
-          color={turbo.isTurboing ? 'warning' : 'primary'}
-          value={25}
+          color={turbo ? 'warning' : 'primary'}
+          value={turboAvailability}
           sx={{ position: 'absolute' }}
         />
       </StyledTurboButton>

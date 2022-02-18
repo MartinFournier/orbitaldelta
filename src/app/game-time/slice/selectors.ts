@@ -15,10 +15,22 @@ export const selectCurrentSpeed = createSelector([domain], state => ({
   isPaused: state.isPaused,
 }));
 
-export const selectTurbo = createSelector([domain], state => ({
-  isTurboing: state.isTurboing,
-  x: false,
-}));
+export const selectTurbo = createSelector([domain], state => state.isTurboing);
+export const selectTurboAvailability = createSelector([domain], state => {
+  const normalize = (value: bigint, min: bigint, max: bigint) =>
+    Number(((value - max) * 100n) / (max - min));
+
+  const turbo = Math.floor(state.turboDeltaMs ?? 0);
+  const max = BigInt(1000 * 60 * 1 * state.speedMultiplier);
+
+  if (turbo === 0 || isNaN(turbo)) return 0;
+
+  const value = BigInt(turbo * state.speedMultiplier);
+  if (value >= max) return 100;
+
+  const normalized = normalize(value, 0n, max);
+  return 100 - Math.abs(normalized);
+});
 
 export const selectIsPaused = createSelector([domain], state => state.isPaused);
 
