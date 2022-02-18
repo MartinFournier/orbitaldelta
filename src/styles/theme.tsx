@@ -98,14 +98,6 @@ const theme = createTheme({
       marginBottom: 1,
     },
   },
-
-  components: {
-    MuiButtonBase: {
-      defaultProps: {
-        // variant: 'outlined',
-      },
-    },
-  },
 });
 
 export default theme;

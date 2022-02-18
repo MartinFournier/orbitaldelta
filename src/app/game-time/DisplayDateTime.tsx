@@ -31,17 +31,20 @@ const GameTime = styled(Typography)<{ $isPaused: boolean }>`
   margin-left: ${props => props.theme.spacing(2)};
   margin-right: ${props => props.theme.spacing(2)};
   background-color: ${props =>
-    props.$isPaused
-      ? props.theme.palette.secondary.main
-      : props.theme.palette.primary.light};
+    props.$isPaused ? 'transparent' : props.theme.palette.primary.light};
   color: ${props =>
     props.$isPaused
-      ? props.theme.palette.secondary.contrastText
+      ? props.theme.palette.primary.light
       : props.theme.palette.bg.contrastText};
-  /* color: ${props => props.theme.palette.bg.dark}; */
+  outline: ${props =>
+    props.$isPaused
+      ? `1px solid ${props.theme.palette.secondary.dark}`
+      : 'none'};
+  outline-offset: -1px;
   box-shadow: ${props => props.theme.shadows[2]};
   border-radius: 4px;
   display: block;
+  margin-top: 2px;
 `;
 
 const StyledIcon = css`

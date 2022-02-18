@@ -17,4 +17,5 @@ const Container = styled(Box)`
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  flex-wrap: wrap;
 `;

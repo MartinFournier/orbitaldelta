@@ -38,7 +38,7 @@ export default function GameSpeedButtons() {
   );
 
   return (
-    <ButtonGroup
+    <StyledButtonGroup
       aria-label="outlined button group"
       sx={{ alignSelf: 'flex-end' }}
     >
@@ -54,16 +54,38 @@ export default function GameSpeedButtons() {
                 ? 'secondary'
                 : 'primary'
             }
-            variant={currentSpeed.speed === speed ? 'contained' : 'outlined'}
+            variant={
+              currentSpeed.speed === speed && !currentSpeed.isPaused
+                ? 'contained'
+                : 'outlined'
+            }
             onClick={() => setSpeed(speed)}
           >
             x{speed}
           </Button>
         </Tooltip>
       ))}
-    </ButtonGroup>
+    </StyledButtonGroup>
   );
 }
+
+const StyledButtonGroup = styled(ButtonGroup)`
+  margin: ${props => props.theme.spacing(1)} ${props => props.theme.spacing(2)};
+  align-self: 'flex-end';
+
+  .MuiButtonGroup-grouped:not(:last-of-type) {
+    margin-right: 2px;
+    border-right-color: initial;
+
+    &.MuiButton-outlinedPrimary:not(:hover) {
+      border-right-color: ${props => props.theme.palette.primary.dark};
+    }
+
+    &.MuiButton-outlinedSecondary:not(:hover) {
+      border-right-color: ${props => props.theme.palette.secondary.dark};
+    }
+  }
+`;
 
 const StyledPauseButton = styled(IconButton)`
   border: 1px solid;

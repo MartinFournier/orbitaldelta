@@ -40,8 +40,8 @@ const InnerWrapper = styled(Box)`
 `;
 
 const TopBar = styled(Box)`
-  background-color: ${props => props.theme.palette.primary.dark};
-  border-bottom: 1px solid ${props => props.theme.palette.primary.light};
+  background-color: ${props => props.theme.palette.bg.dark};
+  border-bottom: 3px solid ${props => props.theme.palette.bg.light};
   color: ${props => props.theme.palette.bg.dark};
   padding: ${props => props.theme.spacing(1)};
   font-weight: 500;
