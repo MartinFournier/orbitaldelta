@@ -13,10 +13,10 @@ export function* process(action: PayloadAction<number>) {
       gameTime.speedMultiplier,
       gameTime.activeDeltaMs,
     );
-    const now = new Date().getTime();
+    const now = performance.now();
     yield put(gameTimeActions.updateGameTime({ newTime, processedOn: now }));
   }
-  yield delay(100);
+  yield delay(10);
 }
 
 export function* watchGameTimeProcess() {

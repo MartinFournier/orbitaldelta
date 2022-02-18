@@ -26,6 +26,7 @@ export default function TogglePauseButton() {
   const PauseButton = (
     <Tooltip title={pauseLabel}>
       <StyledPauseButton
+        size="small"
         aria-label={pauseLabel}
         color={isPaused ? 'secondary' : 'primary'}
         onClick={handleChangePause}

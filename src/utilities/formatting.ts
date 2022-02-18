@@ -33,6 +33,16 @@ export function formatDateTime(input: Date | number) {
   return dateTimeFormatter.format(input);
 }
 
+export function getTimeParts(input: Date | number) {
+  const date = typeof input === 'number' ? new Date(input) : input;
+
+  return {
+    hours: date.getHours(),
+    minutes: date.getMinutes(),
+    seconds: date.getSeconds(),
+  };
+}
+
 export function isNight(input: Date | number) {
   const date = typeof input === 'number' ? new Date(input) : input;
   const hours = date.getHours();

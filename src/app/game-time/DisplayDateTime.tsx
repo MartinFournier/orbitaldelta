@@ -1,25 +1,44 @@
 import React from 'react';
 import { Typography } from '@mui/material';
 import { useAppSelector } from 'store/hooks';
-import { formatDate, formatTime, isNight } from 'utilities/formatting';
-import { selectCurrentTime, selectIsPaused } from './slice/selectors';
+import { formatDate, getTimeParts, isNight } from 'utilities/formatting';
+import {
+  selectCurrentSpeed,
+  selectCurrentTime,
+  selectIsPaused,
+} from './slice/selectors';
 import styled, { css } from 'styled-components';
 
 import TodayOutlinedIcon from '@mui/icons-material/TodayOutlined';
 import Brightness7OutlinedIcon from '@mui/icons-material/Brightness7Outlined';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
 
 export function DisplayDateTime() {
   const currentTime = useAppSelector(selectCurrentTime);
   const isPaused = useAppSelector(selectIsPaused);
+  const currentSpeed = useAppSelector(selectCurrentSpeed);
   if (!currentTime) return <></>;
 
   const nightTime = isNight(currentTime);
-  const CurrentIcon = nightTime ? DayIcon : NightIcon;
+  let CurrentIcon = nightTime ? DayIcon : NightIcon;
+  let { hours, minutes, seconds } = getTimeParts(currentTime);
+  if (currentSpeed.speed > 1000) {
+    seconds = 0;
+  }
+  if (currentSpeed.speed > 10_000) {
+    minutes = 0;
+  }
+  if (currentSpeed.speed > 100_000) {
+    hours = 0;
+    CurrentIcon = TimeIcon;
+  }
   return (
     <GameTime variant="code" id="app-current-time" $isPaused={isPaused}>
       <DateIcon sx={{ mr: 1 }} />
-      {formatDate(currentTime)} {formatTime(currentTime)}
+      {formatDate(currentTime)} {hours.toString().padStart(2, '0')}:
+      {minutes.toString().padStart(2, '0')}:
+      {seconds.toString().padStart(2, '0')}
       <CurrentIcon sx={{ ml: 1 }} />
     </GameTime>
   );
@@ -29,7 +48,6 @@ const GameTime = styled(Typography)<{ $isPaused: boolean }>`
   font-size: 14px;
   padding: ${props => `${props.theme.spacing(1)} ${props.theme.spacing(2)}`};
   margin-left: ${props => props.theme.spacing(2)};
-  margin-right: ${props => props.theme.spacing(2)};
   background-color: ${props =>
     props.$isPaused ? 'transparent' : props.theme.palette.primary.light};
   color: ${props =>
@@ -50,7 +68,6 @@ const GameTime = styled(Typography)<{ $isPaused: boolean }>`
 const StyledIcon = css`
   position: relative;
   top: -1px;
-  /* color: ${props => props.theme.palette.bg.light}; */
 `;
 
 const DayIcon = styled(Brightness7OutlinedIcon)`
@@ -60,5 +77,8 @@ const NightIcon = styled(DarkModeOutlinedIcon)`
   ${StyledIcon}
 `;
 const DateIcon = styled(TodayOutlinedIcon)`
+  ${StyledIcon}
+`;
+const TimeIcon = styled(Brightness4Icon)`
   ${StyledIcon}
 `;

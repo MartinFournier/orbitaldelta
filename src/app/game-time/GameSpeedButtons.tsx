@@ -2,7 +2,16 @@ import React from 'react';
 import { selectCurrentSpeed } from './slice/selectors';
 import { gameTimeActions } from './slice';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
-import { Button, ButtonGroup, Tooltip } from '@mui/material';
+import {
+  Button,
+  ButtonGroup,
+  IconButton,
+  Tooltip,
+  Typography,
+} from '@mui/material';
+
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 
 import styled from 'styled-components';
 import { gameSpeeds } from '.';
@@ -15,35 +24,54 @@ export default function GameSpeedButtons() {
     dispatch(gameTimeActions.setSpeedMultiplier(newSpeed));
   };
 
+  const decreaseSpeed = () => {
+    dispatch(gameTimeActions.decreaseSpeed());
+  };
+
+  const increaseSpeed = () => {
+    dispatch(gameTimeActions.increaseSpeed());
+  };
+
   return (
-    <StyledButtonGroup
-      aria-label="Speed Button Group"
-      size="large"
-      sx={{ alignSelf: 'flex-end' }}
-    >
-      {gameSpeeds.map(speed => (
-        <Tooltip
-          key={`speed-button-x${speed}`}
-          title={`Modify Time Flow to x${speed}`}
-        >
-          <Button
-            color={
-              currentSpeed.speed === speed && currentSpeed.isPaused
-                ? 'secondary'
-                : 'primary'
-            }
-            variant={
-              currentSpeed.speed === speed && !currentSpeed.isPaused
-                ? 'contained'
-                : 'outlined'
-            }
-            onClick={() => setSpeed(speed)}
+    <>
+      <Typography variant="overline" color="primary">
+        Time Flow
+      </Typography>
+      <IconButton size="small" onClick={decreaseSpeed} sx={{ ml: 2 }}>
+        <RemoveIcon />
+      </IconButton>
+      <StyledButtonGroup
+        aria-label="Speed Button Group"
+        size="large"
+        sx={{ alignSelf: 'flex-end' }}
+      >
+        {gameSpeeds.map((speed, index) => (
+          <Tooltip
+            key={`speed-button-x${speed}`}
+            title={`Modify Time Flow to x${speed}`}
           >
-            x{speed}
-          </Button>
-        </Tooltip>
-      ))}
-    </StyledButtonGroup>
+            <Button
+              color={
+                currentSpeed.speed === speed && currentSpeed.isPaused
+                  ? 'secondary'
+                  : 'primary'
+              }
+              variant={
+                currentSpeed.speed === speed && !currentSpeed.isPaused
+                  ? 'contained'
+                  : 'outlined'
+              }
+              onClick={() => setSpeed(speed)}
+            >
+              {index + 1}
+            </Button>
+          </Tooltip>
+        ))}
+      </StyledButtonGroup>
+      <IconButton size="small" sx={{ mr: 2 }} onClick={increaseSpeed}>
+        <AddIcon />
+      </IconButton>
+    </>
   );
 }
 

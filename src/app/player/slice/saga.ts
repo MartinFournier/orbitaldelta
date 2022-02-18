@@ -14,7 +14,7 @@ export function* process(action: PayloadAction<number>) {
   );
   // if lastUpdated > new value, abort
   // calculate duration increment
-  yield put(playerActions.markAsProcessed(new Date().getTime()));
+  yield put(playerActions.markAsProcessed(performance.now()));
   yield delay(10_000);
 }
 

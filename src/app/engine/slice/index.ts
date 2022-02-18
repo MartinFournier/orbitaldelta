@@ -12,9 +12,9 @@ export type EngineState = typeof initialState;
 export const saveGame = createAsyncThunk(
   'engine/saveGame',
   async (saveFn: () => Promise<unknown>) => {
-    const then = new Date().getTime();
+    const then = performance.now();
     await saveFn();
-    const now = new Date().getTime();
+    const now = performance.now();
     const timeElapsed = now - then;
     if (timeElapsed < 1000) {
       // We want a fake loading time so the action is visible.
