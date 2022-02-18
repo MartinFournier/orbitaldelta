@@ -98,6 +98,18 @@ const theme = createTheme({
       marginBottom: 1,
     },
   },
+
+  components: {
+    MuiTooltip: {
+      styleOverrides: {
+        tooltip: {
+          '&.MuiTooltip-tooltip': {
+            fontSize: 12,
+          },
+        },
+      },
+    },
+  },
 });
 
 export default theme;

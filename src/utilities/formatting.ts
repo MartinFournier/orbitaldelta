@@ -1,3 +1,6 @@
+import formatDuration from 'date-fns/formatDuration';
+import intervalToDuration from 'date-fns/intervalToDuration';
+
 const dateFormatter = new Intl.DateTimeFormat('en-CA', {
   month: '2-digit',
   day: '2-digit',
@@ -41,6 +44,11 @@ export function getTimeParts(input: Date | number) {
     minutes: date.getMinutes(),
     seconds: date.getSeconds(),
   };
+}
+
+export function formatHumanDuration(input: number) {
+  const duration = intervalToDuration({ start: 0, end: input });
+  return formatDuration(duration);
 }
 
 export function isNight(input: Date | number) {

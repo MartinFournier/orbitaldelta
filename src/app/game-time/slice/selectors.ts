@@ -32,6 +32,11 @@ export const selectTurboAvailability = createSelector([domain], state => {
   return 100 - Math.abs(normalized);
 });
 
+export const selectTurboTime = createSelector(
+  [domain],
+  state => state.turboDeltaMs,
+);
+
 export const selectIsPaused = createSelector([domain], state => state.isPaused);
 
 export const selectGameTime = createSelector([domain], state => state);
