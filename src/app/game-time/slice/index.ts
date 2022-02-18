@@ -1,4 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { PURGE } from 'redux-persist/lib/constants';
 import { gameSpeeds } from '..';
 
 export const initialState = {
@@ -67,6 +68,9 @@ const slice = createSlice({
       if (speedIndex === -1 || speedIndex === 0) return;
       state.speedMultiplier = gameSpeeds[speedIndex - 1];
     },
+  },
+  extraReducers: builder => {
+    builder.addCase(PURGE, () => initialState);
   },
 });
 

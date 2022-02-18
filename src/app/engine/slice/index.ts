@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import { PURGE } from 'redux-persist/lib/constants';
 import { sleep } from 'utilities/dev';
 
 export const initialState = {
@@ -42,6 +43,7 @@ const slice = createSlice({
       state.isGameSaving = false;
       state.gameSavedOn = action.payload.completedOn;
     });
+    builder.addCase(PURGE, () => initialState);
   },
 });
 

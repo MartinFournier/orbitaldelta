@@ -1,4 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { PURGE } from 'redux-persist/lib/constants';
 
 export const initialState = {
   autosaveEnabled: true,
@@ -24,6 +25,9 @@ const slice = createSlice({
     changeSidebarCollapsed(state, action: PayloadAction<boolean>) {
       state.sidebarCollapsed = action.payload;
     },
+  },
+  extraReducers: builder => {
+    builder.addCase(PURGE, () => initialState);
   },
 });
 

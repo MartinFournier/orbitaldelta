@@ -1,4 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { PURGE } from 'redux-persist/lib/constants';
 
 export const initialState = {
   username: 'test',
@@ -22,6 +23,9 @@ const slice = createSlice({
     incrementProcessingDeltaMs(state, action: PayloadAction<number>) {
       state.processingDeltaMs = state.processingDeltaMs + action.payload;
     },
+  },
+  extraReducers: builder => {
+    builder.addCase(PURGE, () => initialState);
   },
 });
 

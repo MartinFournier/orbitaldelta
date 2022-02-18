@@ -58,6 +58,8 @@ export const toastActions = {
 
 export const notifications = {
   gameSaved: () => toastActions.info('Saved Game', { autoHideDuration: 1000 }),
+  deletedGameSave: () =>
+    toastActions.warning('Delete save data!', { autoHideDuration: 1000 }),
 };
 
 export default toastActions;
