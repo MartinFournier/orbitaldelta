@@ -34,11 +34,14 @@ export default function GameSpeedButtons() {
 
   return (
     <>
+      <IconButton size="small" onClick={decreaseSpeed} sx={{ mr: 1 }}>
+        <RemoveIcon />
+      </IconButton>
       <Typography variant="overline" color="primary">
         Time Flow
       </Typography>
-      <IconButton size="small" onClick={decreaseSpeed} sx={{ ml: 2 }}>
-        <RemoveIcon />
+      <IconButton size="small" sx={{ ml: 1 }} onClick={increaseSpeed}>
+        <AddIcon />
       </IconButton>
       <StyledButtonGroup
         aria-label="Speed Button Group"
@@ -68,9 +71,6 @@ export default function GameSpeedButtons() {
           </Tooltip>
         ))}
       </StyledButtonGroup>
-      <IconButton size="small" sx={{ mr: 2 }} onClick={increaseSpeed}>
-        <AddIcon />
-      </IconButton>
     </>
   );
 }

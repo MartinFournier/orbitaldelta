@@ -16,6 +16,7 @@ export const map: KeyMap = {
   GAME_SAVE: 'ctrl+s',
 
   GAME_TOGGLE_PAUSE: 'space',
+  GAME_TOGGLE_TURBO: '`',
 
   GAME_SPEED_INCREASE: { sequence: '+', action: 'keyup' },
   GAME_SPEED_DECREASE: { sequence: '-', action: 'keyup' },
@@ -50,6 +51,10 @@ export default function GlobalHotkeys({
     GAME_TOGGLE_PAUSE: event => {
       event?.preventDefault();
       dispatch(gameTimeActions.togglePauseGame());
+    },
+    GAME_TOGGLE_TURBO: event => {
+      event?.preventDefault();
+      dispatch(gameTimeActions.toggleTurbo());
     },
     GAME_SPEED_INCREASE: event => {
       event?.preventDefault();

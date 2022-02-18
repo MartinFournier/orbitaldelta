@@ -3,10 +3,11 @@ import { gameSpeeds } from '..';
 
 export const initialState = {
   isPaused: false,
+  isTurboing: false,
   currentTime: new Date(1959, 6, 8).getTime(),
   speedMultiplier: 1,
   activeDeltaMs: 0,
-  pausedDeltaMs: 0,
+  turboDeltaMs: 0,
   lastProcessedOn: 0,
 };
 
@@ -14,6 +15,7 @@ export type GameTimeState = typeof initialState;
 
 export type UpdateTimePayload = {
   newTime: number;
+  consumedTurboDeltaMs: number;
   processedOn: number;
 };
 
@@ -25,12 +27,14 @@ const slice = createSlice({
       state.currentTime = action.payload.newTime;
       state.lastProcessedOn = action.payload.processedOn;
       state.activeDeltaMs = 0;
+      state.turboDeltaMs -= action.payload.consumedTurboDeltaMs;
     },
     incrementDeltaMs(state, action: PayloadAction<number>) {
+      const delta = action.payload;
       if (state.isPaused) {
-        state.pausedDeltaMs = state.pausedDeltaMs + action.payload;
+        state.turboDeltaMs = state.turboDeltaMs + delta;
       } else {
-        state.activeDeltaMs = state.activeDeltaMs + action.payload;
+        state.activeDeltaMs = state.activeDeltaMs + delta;
       }
     },
     setSpeedMultiplier(state, action: PayloadAction<number>) {
@@ -49,6 +53,9 @@ const slice = createSlice({
     },
     togglePauseGame(state) {
       state.isPaused = !state.isPaused;
+    },
+    toggleTurbo(state) {
+      state.isTurboing = !state.isTurboing;
     },
     increaseSpeed(state) {
       const speedIndex = gameSpeeds.indexOf(state.speedMultiplier);

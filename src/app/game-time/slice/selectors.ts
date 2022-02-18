@@ -15,6 +15,11 @@ export const selectCurrentSpeed = createSelector([domain], state => ({
   isPaused: state.isPaused,
 }));
 
+export const selectTurbo = createSelector([domain], state => ({
+  isTurboing: state.isTurboing,
+  x: false,
+}));
+
 export const selectIsPaused = createSelector([domain], state => state.isPaused);
 
 export const selectGameTime = createSelector([domain], state => state);
