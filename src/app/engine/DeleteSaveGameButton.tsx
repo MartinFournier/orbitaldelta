@@ -15,12 +15,11 @@ export function DeleteSaveGameButton(props: MuiButtonProps) {
 
   const onButtonClick = async () => {
     if (!persistor) return;
-    persistor.pause();
     setIsDeleting(true);
     await persistor?.purge();
-    navigate('/');
-    await sleep(2000);
+    await sleep(1000);
     setIsDeleting(false);
+    navigate('/');
     window.location.reload();
   };
   return (
