@@ -38,6 +38,9 @@ const slice = createSlice({
         state.activeDeltaMs = state.activeDeltaMs + delta;
       }
     },
+    incrementTurboDeltaMs(state, action: PayloadAction<number>) {
+      state.turboDeltaMs = state.turboDeltaMs + action.payload;
+    },
     setSpeedMultiplier(state, action: PayloadAction<number>) {
       state.speedMultiplier = action.payload;
     },

@@ -12,6 +12,7 @@ import {
   WithSnackbarProps,
 } from 'notistack';
 import React from 'react';
+import { formatHumanDuration } from 'utilities/formatting';
 
 let useSnackbarRef: WithSnackbarProps;
 export const SnackbarUtilsConfigurator: React.FC = () => {
@@ -60,6 +61,12 @@ export const notifications = {
   gameSaved: () => toastActions.info('Saved Game', { autoHideDuration: 1000 }),
   deletedGameSave: () =>
     toastActions.warning('Delete save data!', { autoHideDuration: 1000 }),
+  addedOfflineTime: (ms: number) =>
+    toastActions.info(
+      <>
+        Offline time accrued: added {formatHumanDuration(ms)} to the turbo pool.
+      </>,
+    ),
 };
 
 export default toastActions;

@@ -79,21 +79,21 @@ export function App(props: AppProps) {
       </Helmet>
       <AppThemeProvider>
         <ErrorHandler>
-          <PersistGate
-            loading={<LoadingPage {...pages.loading} />}
-            persistor={props.persistor}
-          >
-            <PersistorProvider persistor={props.persistor}>
-              <GlobalHotkeys>
-                <StyledSnackbarProvider>
-                  <SnackbarUtilsConfigurator />
+          <StyledSnackbarProvider>
+            <SnackbarUtilsConfigurator />
+            <PersistGate
+              loading={<LoadingPage {...pages.loading} />}
+              persistor={props.persistor}
+            >
+              <PersistorProvider persistor={props.persistor}>
+                <GlobalHotkeys>
                   <Engine>
                     <AppRoutes />
                   </Engine>
-                </StyledSnackbarProvider>
-              </GlobalHotkeys>
-            </PersistorProvider>
-          </PersistGate>
+                </GlobalHotkeys>
+              </PersistorProvider>
+            </PersistGate>
+          </StyledSnackbarProvider>
         </ErrorHandler>
       </AppThemeProvider>
     </BrowserRouter>

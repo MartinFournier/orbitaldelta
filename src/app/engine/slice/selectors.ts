@@ -9,8 +9,12 @@ export const selectIsGameSaving = createSelector(
   [domain],
   state => state.isGameSaving,
 );
-export const selectGameSavedOn = createSelector([domain], state =>
+export const selectGameSavedOnDisplay = createSelector([domain], state =>
   state.gameSavedOn ? new Date(state.gameSavedOn).toLocaleString() : 'n/a',
+);
+export const selectGameSavedOn = createSelector(
+  [domain],
+  state => state.gameSavedOn,
 );
 export const selectShowEngineStats = createSelector(
   [domain],

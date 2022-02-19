@@ -1,4 +1,4 @@
-import { select, delay, putResolve } from 'redux-saga/effects';
+import { select, delay, putResolve, takeEvery, put } from 'redux-saga/effects';
 import { saveGame } from '.';
 import {
   selectAutosave,
@@ -6,6 +6,9 @@ import {
 } from 'app/settings/slice/selectors';
 import { persistor } from 'store';
 import { notifications } from 'app/common/Toasts';
+import { REHYDRATE } from 'redux-persist/lib/constants';
+import { selectGameSavedOn } from './selectors';
+import { gameTimeActions } from 'app/game-time/slice';
 
 export function* autosave() {
   while (true) {
@@ -16,4 +19,16 @@ export function* autosave() {
       notifications.gameSaved();
     }
   }
+}
+
+export function* processOfflineTime() {
+  const lastSavedOn: number = yield select(selectGameSavedOn);
+  const now = new Date().getTime();
+  const offlineTime = now - lastSavedOn;
+  yield put(gameTimeActions.incrementTurboDeltaMs(offlineTime));
+  notifications.addedOfflineTime(offlineTime);
+}
+
+export function* watchEngineRehydrate() {
+  yield takeEvery(REHYDRATE, processOfflineTime);
 }

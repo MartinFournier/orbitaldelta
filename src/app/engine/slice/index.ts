@@ -38,6 +38,7 @@ const slice = createSlice({
   extraReducers: builder => {
     builder.addCase(saveGame.pending, state => {
       state.isGameSaving = true;
+      state.gameSavedOn = new Date().getTime();
     });
     builder.addCase(saveGame.fulfilled, (state, action) => {
       state.isGameSaving = false;

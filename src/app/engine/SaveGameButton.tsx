@@ -5,7 +5,10 @@ import { ButtonProps as MuiButtonProps } from '@mui/material/Button';
 import SaveIcon from '@mui/icons-material/Save';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
-import { selectGameSavedOn, selectIsGameSaving } from './slice/selectors';
+import {
+  selectGameSavedOnDisplay,
+  selectIsGameSaving,
+} from './slice/selectors';
 import { saveGame } from './slice';
 import { notifications } from 'app/common/Toasts';
 import { usePersistor } from './usePersistor';
@@ -13,7 +16,7 @@ import { usePersistor } from './usePersistor';
 export function SaveGameButton({ ...buttonProps }: MuiButtonProps) {
   const persistor = usePersistor();
   const dispatch = useAppDispatch();
-  const savedOn = useAppSelector(selectGameSavedOn);
+  const savedOn = useAppSelector(selectGameSavedOnDisplay);
   const isSaving = useAppSelector(selectIsGameSaving);
 
   const onButtonClick = async () => {
