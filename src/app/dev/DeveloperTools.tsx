@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Button } from '@mui/material';
 import toastActions from 'app/common/Toasts';
 import { TypographyDemo } from './TypographyDemo';
+import { GameTime } from './GameTime';
 import { ContentTabbed, TabbedData } from 'app/common/ContentTabbed';
 
 export function DeveloperTools() {
@@ -13,16 +14,16 @@ export function DeveloperTools() {
     toastActions.toast('Toast!', { autoHideDuration: 30_000 });
   };
 
-  const actions = (
+  const misc = (
     <Button variant="outlined" onClick={handleClick}>
       Toasts
     </Button>
   );
 
-  const typography = <TypographyDemo />;
   const tabs: TabbedData[] = [
-    { id: 'dev-actions', label: 'Actions', content: actions },
-    { id: 'dev-typography', label: 'Typography', content: typography },
+    { id: 'dev-gametime', label: 'Game Time', content: <GameTime /> },
+    { id: 'dev-misc', label: 'Misc', content: misc },
+    { id: 'dev-typography', label: 'Typography', content: <TypographyDemo /> },
   ];
 
   return <ContentTabbed tabs={tabs} />;

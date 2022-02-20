@@ -44,6 +44,10 @@ const slice = createSlice({
     incrementTurboDeltaMs(state, action: PayloadAction<number>) {
       state.turboDeltaMs = state.turboDeltaMs + action.payload;
     },
+
+    updateTurboDeltaMs(state, action: PayloadAction<number>) {
+      state.turboDeltaMs = action.payload;
+    },
     setSpeedMultiplier(state, action: PayloadAction<number>) {
       state.speedMultiplier = action.payload;
     },
