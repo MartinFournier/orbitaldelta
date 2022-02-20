@@ -21,7 +21,7 @@ export const selectTurboAvailability = createSelector([domain], state => {
     Number(((value - max) * 100n) / (max - min));
 
   const turbo = Math.floor(state.turboDeltaMs ?? 0);
-  const max = BigInt(1000 * 60 * 1 * state.speedMultiplier);
+  const max = BigInt(1000 * 60 * 60 * 1 * state.speedMultiplier);
 
   if (turbo === 0 || isNaN(turbo)) return 0;
 
