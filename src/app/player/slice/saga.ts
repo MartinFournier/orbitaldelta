@@ -3,6 +3,7 @@ import { selectPlayer } from './selectors';
 import { playerActions, PlayerState } from '.';
 import { updatePlayer as processPlayer } from '..';
 import { PayloadAction } from '@reduxjs/toolkit';
+import { updateRates } from 'app/engine/updateRates';
 
 export function* process(action: PayloadAction<number>) {
   const player: PlayerState = yield select(selectPlayer);
@@ -16,7 +17,7 @@ export function* process(action: PayloadAction<number>) {
   // calculate duration increment
   const now = new Date().getTime();
   yield put(playerActions.markAsProcessed(now));
-  yield delay(10_000);
+  yield delay(updateRates.playerRate);
 }
 
 export function* watchPlayerProcess() {

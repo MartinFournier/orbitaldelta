@@ -2,6 +2,7 @@ import { put, select, delay, takeLeading } from 'redux-saga/effects';
 import { selectGameTime } from './selectors';
 import { gameTimeActions, GameTimeState } from '.';
 import { PayloadAction } from '@reduxjs/toolkit';
+import { updateRates } from 'app/engine/updateRates';
 
 const boostMs = 100;
 
@@ -27,7 +28,7 @@ export function* process(action: PayloadAction<number>) {
       }),
     );
   }
-  yield delay(50);
+  yield delay(updateRates.gameTimeRate);
 }
 
 export function* watchGameTimeProcess() {

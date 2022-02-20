@@ -42,7 +42,6 @@ const slice = createSlice({
     });
     builder.addCase(saveGame.fulfilled, (state, action) => {
       state.isGameSaving = false;
-      state.gameSavedOn = action.payload.completedOn;
     });
     builder.addCase(PURGE, () => initialState);
   },

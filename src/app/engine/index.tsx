@@ -7,6 +7,7 @@ import { EngineInfo } from './EngineInfo';
 import { useAppSelector } from 'store/hooks';
 import { selectShowEngineStats } from './slice/selectors';
 import { gameTimeActions } from 'app/game-time/slice';
+import { updateRates } from './updateRates';
 
 interface EngineProps {
   children: React.ReactNode;
@@ -24,7 +25,7 @@ export function Engine({ children }: EngineProps) {
     return handler;
   }, [dispatch]);
 
-  const timings = useGameLoop(handleProcessing, 50);
+  const timings = useGameLoop(handleProcessing, updateRates.engineRate);
   return (
     <>
       {children}
