@@ -25,25 +25,29 @@ export default function ToggleTurboButton() {
   const labelPrefix = turbo ? 'Disable Turbo' : 'Enable Turbo';
   const buttonTooltip = (
     <>
-      {labelPrefix} ({formatHumanDuration(turboTime)})
+      {labelPrefix}{' '}
+      {turboTime > 0 && <>( {formatHumanDuration(turboTime)} available )</>}
     </>
   );
   const TurboButton = (
-    <Tooltip title={buttonTooltip} arrow>
-      <StyledTurboButton
-        size="small"
-        aria-label={labelPrefix}
-        color={turbo ? 'warning' : 'primary'}
-        onClick={handleChangePause}
-      >
-        <SpeedIcon />
-        <StyledCircular
-          variant="determinate"
+    <Tooltip title={buttonTooltip}>
+      <span>
+        <StyledTurboButton
+          size="small"
+          aria-label={labelPrefix}
           color={turbo ? 'warning' : 'primary'}
-          value={turboAvailability}
-          size="41px"
-        />
-      </StyledTurboButton>
+          onClick={handleChangePause}
+          disabled={turboTime === 0}
+        >
+          <SpeedIcon />
+          <StyledCircular
+            variant="determinate"
+            color={turbo ? 'warning' : 'primary'}
+            value={turboAvailability}
+            size="41px"
+          />
+        </StyledTurboButton>
+      </span>
     </Tooltip>
   );
 

@@ -29,6 +29,9 @@ const slice = createSlice({
       state.lastProcessedOn = action.payload.processedOn;
       state.activeDeltaMs = 0;
       state.turboDeltaMs -= action.payload.consumedTurboDeltaMs;
+      if (state.turboDeltaMs <= 0) {
+        state.isTurboing = false;
+      }
     },
     incrementDeltaMs(state, action: PayloadAction<number>) {
       const delta = action.payload;
