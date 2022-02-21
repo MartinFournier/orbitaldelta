@@ -23,6 +23,7 @@ export function* autosave() {
 
 export function* processOfflineTime() {
   const lastSavedOn: number = yield select(selectGameSavedOn);
+  if (!lastSavedOn || isNaN(lastSavedOn)) return;
   const now = new Date().getTime();
   const offlineTime = now - lastSavedOn;
   yield put(gameTimeActions.incrementTurboDeltaMs(offlineTime));
