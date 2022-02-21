@@ -1,11 +1,11 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { PURGE } from 'redux-persist/lib/constants';
-import { gameSpeeds } from '..';
+import { gameSpeeds, gameStartTime } from '..';
 
 export const initialState = {
   isPaused: false,
   isTurboing: false,
-  currentTime: new Date(1959, 6, 8).getTime(),
+  currentTime: gameStartTime,
   speedMultiplier: 1,
   activeDeltaMs: 0,
   turboDeltaMs: 0,

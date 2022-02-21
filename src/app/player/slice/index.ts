@@ -1,10 +1,10 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { gameStartTime } from 'app/game-time';
 import { PURGE } from 'redux-persist/lib/constants';
 
 export const initialState = {
   username: 'test',
-  lastProcessedOn: 0,
-  processingDeltaMs: 0,
+  processedOn: gameStartTime,
 };
 
 export type PlayerState = typeof initialState;
@@ -17,11 +17,7 @@ const slice = createSlice({
       state.username = action.payload;
     },
     markAsProcessed(state, action: PayloadAction<number>) {
-      state.lastProcessedOn = action.payload;
-      state.processingDeltaMs = 0;
-    },
-    incrementProcessingDeltaMs(state, action: PayloadAction<number>) {
-      state.processingDeltaMs = state.processingDeltaMs + action.payload;
+      state.processedOn = action.payload;
     },
   },
   extraReducers: builder => {
