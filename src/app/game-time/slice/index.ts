@@ -9,7 +9,7 @@ export const initialState = {
   speedMultiplier: 1,
   activeDeltaMs: 0,
   turboDeltaMs: 0,
-  lastProcessedOn: 0,
+  processedOn: 0,
 };
 
 export type GameTimeState = typeof initialState;
@@ -26,7 +26,7 @@ const slice = createSlice({
   reducers: {
     updateGameTime(state, action: PayloadAction<UpdateTimePayload>) {
       state.currentTime = action.payload.newTime;
-      state.lastProcessedOn = action.payload.processedOn;
+      state.processedOn = action.payload.processedOn;
       state.activeDeltaMs = 0;
       state.turboDeltaMs -= action.payload.consumedTurboDeltaMs;
       if (state.turboDeltaMs <= 0) {

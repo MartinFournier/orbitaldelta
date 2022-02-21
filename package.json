@@ -51,6 +51,7 @@
     "@fontsource/merriweather-sans": "4.5.3",
     "@fontsource/mukta-vaani": "4.5.2",
     "@mui/icons-material": "5.3.1",
+    "@mui/lab": "5.0.0-alpha.69",
     "@mui/material": "5.4.0",
     "@mui/styled-engine-sc": "5.3.0",
     "@reduxjs/toolkit": "1.7.1",
