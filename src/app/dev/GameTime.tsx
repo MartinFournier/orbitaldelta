@@ -49,13 +49,15 @@ export function GameTimeAdjuster() {
           Set Date
         </Button>
       </ButtonGroup>
-      <DevAdjuster
-        keyId="time"
-        label="Game Time (ms)"
-        defaultIncrement={1000 * 60 * 60}
-        bigValueMultiplier={24}
-        incrementFn={modifyTime}
-      />
+      <Box>
+        <DevAdjuster
+          keyId="time"
+          label="Game Time (ms)"
+          defaultIncrement={1000 * 60 * 60}
+          bigValueMultiplier={24}
+          incrementFn={modifyTime}
+        />
+      </Box>
     </Box>
   );
 }
