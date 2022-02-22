@@ -1,6 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { PURGE } from 'redux-persist/lib/constants';
 import { gameSpeeds, gameStartTime } from '..';
+import clamp from 'lodash/clamp';
 
 export const initialState = {
   isPaused: false,
@@ -42,7 +43,11 @@ const slice = createSlice({
       }
     },
     incrementTurboDeltaMs(state, action: PayloadAction<number>) {
-      state.turboDeltaMs = state.turboDeltaMs + action.payload;
+      state.turboDeltaMs = clamp(
+        state.turboDeltaMs + action.payload,
+        0,
+        Number.MAX_VALUE,
+      );
     },
 
     updateTurboDeltaMs(state, action: PayloadAction<number>) {
