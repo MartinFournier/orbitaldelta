@@ -100,6 +100,16 @@ const theme = createTheme({
   },
 
   components: {
+    MuiButtonBase: {
+      styleOverrides: {
+        root: {
+          '&:disabled': {
+            cursor: 'not-allowed',
+            pointerEvents: 'auto',
+          },
+        },
+      },
+    },
     MuiTooltip: {
       styleOverrides: {
         tooltip: {
