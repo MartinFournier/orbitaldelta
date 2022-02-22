@@ -49,7 +49,7 @@ export function DevAdjuster(props: DevAdjusterProps) {
 
   return (
     <ButtonGroup size="small">
-      <Tooltip title="Remove all">
+      <Tooltip title={props.setValueFn ? 'Remove all' : ''}>
         <Button
           variant="outlined"
           disabled={!props.setValueFn}
