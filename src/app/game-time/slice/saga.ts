@@ -4,7 +4,7 @@ import { gameTimeActions, GameTimeState } from '.';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { updateRates } from 'app/engine/updateRates';
 
-const boostMs = 100;
+const boostMs = updateRates.gameTimeRate * 10;
 
 export function* process(action: PayloadAction<number>) {
   const gameTime: GameTimeState = yield select(selectGameTime);
