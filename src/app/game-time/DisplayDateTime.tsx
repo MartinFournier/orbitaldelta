@@ -29,9 +29,11 @@ export function DisplayDateTime() {
   if (currentSpeed.speed > 10_000) {
     minutes = 0;
   }
+  if (currentSpeed.speed > 50_000) {
+    CurrentIcon = TimeIcon;
+  }
   if (currentSpeed.speed > 100_000) {
     hours = 0;
-    CurrentIcon = TimeIcon;
   }
   return (
     <GameTime variant="code" id="app-current-time" $isPaused={isPaused}>
