@@ -70,8 +70,8 @@ export function TurboAdjuster() {
     <DevAdjuster
       keyId="turbo"
       label="Turbo Time (ms)"
-      defaultIncrement={10_000}
-      bigValueMultiplier={1000}
+      defaultIncrement={1000 * 60 * 60}
+      bigValueMultiplier={24}
       incrementFn={modifyTurboTime}
       setValueFn={setTurboTime}
     />
