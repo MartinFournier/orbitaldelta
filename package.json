@@ -143,7 +143,7 @@
     "lint-staged": "12.3.3",
     "mini-css-extract-plugin": "^2.5.3",
     "patch-package": "6.4.7",
-    "postcss": "^8.4.6",
+    "postcss": "^8.4.31",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-loader": "^6.2.1",
     "postcss-normalize": "^10.0.1",
