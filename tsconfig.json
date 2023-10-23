@@ -19,7 +19,7 @@
     "baseUrl": "./src",
     "plugins": [
       {
-        "name": "typescript-styled-plugin",
+        "name": "@styled/typescript-styled-plugin",
         "validate": false
       }
     ],

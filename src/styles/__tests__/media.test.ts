@@ -9,6 +9,7 @@ describe('media', () => {
       .map(line => line.trim())
       .join('\n');
     const cssVersion = css`
+      /* stylelint-disable-next-line media-query-no-invalid */
       @media (min-width: ${sizes.small}px) {
         color: red;
       }

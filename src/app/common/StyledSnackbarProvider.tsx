@@ -13,15 +13,19 @@ const Snackbar = styled(SnackbarProvider)`
       color: ${props => props.theme.palette.primary.contrastText};
     }
   }
+
   &.SnackbarItem-variantSuccess {
     background-color: ${props => props.theme.palette.success.main};
   }
+
   &.SnackbarItem-variantInfo {
     background-color: ${props => props.theme.palette.info.main};
   }
+
   &.SnackbarItem-variantError {
     background-color: ${props => props.theme.palette.error.main};
   }
+
   &.SnackbarItem-variantWarning {
     background-color: ${props => props.theme.palette.warning.main};
   }

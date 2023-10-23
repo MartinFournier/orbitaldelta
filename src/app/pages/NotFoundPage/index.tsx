@@ -20,5 +20,5 @@ const Title = styled(Typography)`
 const P = styled(Typography)`
   font-size: 1rem;
   line-height: 1.5;
-  margin: 0.625rem 0 1.5rem 0;
+  margin: 0.625rem 0 1.5rem;
 `;

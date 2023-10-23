@@ -29,6 +29,7 @@ export const media = (Object.keys(sizes) as Array<keyof typeof sizes>).reduce(
   (acc, label) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     acc[label] = (first: any, ...interpolations: any[]) => css`
+      /* stylelint-disable-next-line media-query-no-invalid */
       @media (min-width: ${sizes[label]}px) {
         ${css(first, ...interpolations)}
       }
