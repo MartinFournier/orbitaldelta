@@ -171,6 +171,6 @@
     "webpack": "^5.105.4",
     "webpack-dev-server": "^5.2.2",
     "webpack-manifest-plugin": "^4.1.1",
-    "workbox-webpack-plugin": "^7.4.0"
+    "workbox-webpack-plugin": "^7.4.1"
   }
 }
